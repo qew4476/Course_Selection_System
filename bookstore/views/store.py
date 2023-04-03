@@ -19,7 +19,7 @@ store = Blueprint('bookstore', __name__, template_folder='../templates')
 @store.route('/', methods=['GET', 'POST'])
 @login_required
 def bookstore():
-    result = Product.count()
+    result = Course.count()
     count = math.ceil(result[0]/9)
     flag = 0
 
@@ -38,7 +38,7 @@ def bookstore():
         search = request.values.get('keyword')
         keyword = search
         
-        cursor.prepare('SELECT * FROM COURSE WHERE PNAME LIKE :search')
+        cursor.prepare('SELECT * FROM COURSE WHERE CNAME LIKE :search')
         cursor.execute(None, {'search': '%' + keyword + '%'})
         book_row = cursor.fetchall()
         book_data = []
@@ -46,9 +46,9 @@ def bookstore():
         
         for i in book_row:
             book = {
-                '商品編號': i[0],
-                '商品名稱': i[1],
-                '商品價格': i[2]
+                '課程編號': i[0],
+                '課程名稱': i[1],
+                '開課系所': i[2]
             }
             book_data.append(book)
             total = total + 1
@@ -65,23 +65,23 @@ def bookstore():
         return render_template('bookstore.html', single=single, keyword=search, book_data=book_data, user=current_user.name, page=1, flag=flag, count=count)    
 
     
-    elif 'pid' in request.args:
-        pid = request.args['pid']
-        data = Course.get_product(pid)
+    elif 'cid' in request.args:
+        cid = request.args['cid']
+        data = Course.get_course(cid)
         
-        pname = data[1]
-        price = data[2]
-        category = data[3]
+        cname = data[1]
+        department = data[2]
+        tid = data[3]   #教師編號
         description = data[4]
         image = 'sdg.jpg'
         
         product = {
-            '商品編號': pid,
-            '商品名稱': pname,
-            '單價': price,
-            '類別': category,
-            '商品敘述': description,
-            '商品圖片': image
+            '課程編號': cid,
+            '課程名稱': cname,
+            '開課系所': department,
+            '教師編號': tid,
+            '課程敘述': description,
+            '課程圖片': image
         }
 
         return render_template('product.html', data = product, user=current_user.name)
@@ -91,15 +91,15 @@ def bookstore():
         start = (page - 1) * 9
         end = page * 9
         
-        book_row = Course.get_all_product()
+        book_row = Course.get_all_course()
         book_data = []
         final_data = []
         
         for i in book_row:
             book = {
-                '商品編號': i[0],
-                '商品名稱': i[1],
-                '商品價格': i[2]
+                '課程編號': i[0],
+                '課程名稱': i[1],
+                '開課系所': i[2]
             }
             book_data.append(book)
             
@@ -116,7 +116,7 @@ def bookstore():
         single = 1
         search = request.values.get('keyword')
         keyword = search
-        cursor.prepare('SELECT * FROM PRODUCT WHERE PNAME LIKE :search')
+        cursor.prepare('SELECT * FROM COURSE WHERE CNAME LIKE :search')
         cursor.execute(None, {'search': '%' + keyword + '%'})
         book_row = cursor.fetchall()
         book_data = []
@@ -124,9 +124,9 @@ def bookstore():
         
         for i in book_row:
             book = {
-                '商品編號': i[0],
-                '商品名稱': i[1],
-                '商品價格': i[2]
+                '課程編號': i[0],
+                '課程名稱': i[1],
+                '開課系所': i[2]
             }
 
             book_data.append(book)
@@ -140,14 +140,14 @@ def bookstore():
         return render_template('bookstore.html', keyword=search, single=single, book_data=book_data, user=current_user.name, page=1, flag=flag, count=count)    
     
     else:
-        book_row = Product.get_all_product()
+        book_row = Course.get_all_course()
         book_data = []
         temp = 0
         for i in book_row:
             book = {
-                '商品編號': i[0],
-                '商品名稱': i[1],
-                '商品價格': i[2],
+                '課程編號': i[0],
+                '課程名稱': i[1],
+                '開課系所': i[2],
             }
             if len(book_data) < 9:
                 book_data.append(book)
