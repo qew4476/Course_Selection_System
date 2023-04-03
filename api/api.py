@@ -17,7 +17,7 @@ class User(UserMixin):
 def user_loader(userid):  
     user = User()
     user.id = userid
-    data = Member.get_role(userid)
+    data = Student.get_role(userid)
     try:
         user.role = data[0]
         user.name = data[1]
@@ -31,7 +31,7 @@ def login():
 
         account = request.form['account']
         password = request.form['password']
-        data = Member.get_member(account) 
+        data = Student.get_student(account) 
 
         try:
             DB_password = data[0][1]
@@ -63,7 +63,7 @@ def login():
 def register():
     if request.method == 'POST':
         user_account = request.form['account']
-        exist_account = Member.get_all_account()
+        exist_account = Student.get_all_account()
         account_list = []
         for i in exist_account:
             account_list.append(i[0])
@@ -73,12 +73,15 @@ def register():
             return redirect(url_for('api.register'))
         else:
             input = { 
-                'name': request.form['username'], 
+                'sname': request.form['username'],
+                'sid': request.form['student_id'],
+                'sgrade': request.form['grade'],
+                'semail': request.form['email'],
                 'account':user_account, 
                 'password':request.form['password'], 
                 'identity':request.form['identity'] 
             }
-            Member.create_member(input)
+            Student.create_student(input)
             return redirect(url_for('api.login'))
 
     return render_template('register.html')
