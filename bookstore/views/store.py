@@ -11,9 +11,10 @@ from sqlalchemy import null
 from link import *
 import math
 from base64 import b64encode
-from api.sql import Member, Order_List, Product, Record, Cart
+from api.sql import Member, Order_List, Product, Record, Cart,Course
 
 store = Blueprint('bookstore', __name__, template_folder='../templates')
+
 
 @store.route('/', methods=['GET', 'POST'])
 @login_required
@@ -21,7 +22,8 @@ def bookstore():
     result = Product.count()
     count = math.ceil(result[0]/9)
     flag = 0
-    
+
+    # 若為管理者則轉到管理者頁面
     if request.method == 'GET':
         if(current_user.role == 'manager'):
             flash('No permission')
@@ -36,7 +38,7 @@ def bookstore():
         search = request.values.get('keyword')
         keyword = search
         
-        cursor.prepare('SELECT * FROM PRODUCT WHERE PNAME LIKE :search')
+        cursor.prepare('SELECT * FROM COURSE WHERE PNAME LIKE :search')
         cursor.execute(None, {'search': '%' + keyword + '%'})
         book_row = cursor.fetchall()
         book_data = []
@@ -65,7 +67,7 @@ def bookstore():
     
     elif 'pid' in request.args:
         pid = request.args['pid']
-        data = Product.get_product(pid)
+        data = Course.get_product(pid)
         
         pname = data[1]
         price = data[2]
@@ -89,7 +91,7 @@ def bookstore():
         start = (page - 1) * 9
         end = page * 9
         
-        book_row = Product.get_all_product()
+        book_row = Course.get_all_product()
         book_data = []
         final_data = []
         
@@ -151,6 +153,10 @@ def bookstore():
                 book_data.append(book)
         
         return render_template('bookstore.html', book_data=book_data, user=current_user.name, page=1, flag=flag, count=count)
+
+
+
+
 
 # 會員購物車
 @store.route('/cart', methods=['GET', 'POST'])
