@@ -32,7 +32,7 @@ class DB():
 
 class Student():
     def get_student(account):
-        sql = "SELECT ACCOUNT, PASSWORD, SID, SNAME, SGRADE, SEMAIL, IDENTITY FROM STUDENT WHERE ACCOUNT = :id"
+        sql = "SELECT ACCOUNT, PASSWORD,IDENTITY, SID, SNAME, SGRADE, SEMAIL  FROM STUDENT WHERE ACCOUNT = :id"
         return DB.fetchall(DB.execute_input(DB.prepare(sql), {'id': account}))
 
     def get_all_account():
