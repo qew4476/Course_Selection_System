@@ -40,7 +40,7 @@ class Student():
         return DB.fetchall(DB.execute(DB.connect(), sql))
 
     def create_student(input):
-        sql = 'INSERT INTO STUDENT VALUES (:account, :sname, :sid,  :sgrade, :semail, :identity, :password)'
+        sql = 'INSERT INTO STUDENT VALUES (:account, :password,:sid,:sname, :sgrade, :semail, :identity)'
         DB.execute_input(DB.prepare(sql), input)
         DB.commit()
 
@@ -151,6 +151,18 @@ class Product():
 
     def update_product(input):
         sql = 'UPDATE PRODUCT SET PNAME=:name, PRICE=:price, CATEGORY=:category, PDESC=:description WHERE PID=:pid'
+        DB.execute_input(DB.prepare(sql), input)
+        DB.commit()
+
+
+class Selerecord():
+    def check_course(userid, cid):
+        sql = 'SELECT * FROM SELERECORD WHERE CID = :cid AND ACCOUNT = :id'
+        return DB.fetchone(DB.execute_input(DB.prepare(sql), {'id': userid, 'cid': cid}))
+        # user_id是account
+
+    def add_course(input):
+        sql = 'INSERT INTO SELERECORD VALUES (:id, :cid)'
         DB.execute_input(DB.prepare(sql), input)
         DB.commit()
 
