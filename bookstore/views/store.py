@@ -20,6 +20,12 @@ store = Blueprint('bookstore', __name__, template_folder='../templates')
 @store.route('/', methods=['GET', 'POST'])
 @login_required
 def bookstore():
+    hasSelected = Selerecord.get_record(current_user.id)   # 已選課程
+    hasSelected_cid = []
+    for i in hasSelected:
+        hasSelected_cid.append(i[1])
+
+
     result = Course.count()
     count = math.ceil(result[0]/9)
     flag = 0
@@ -65,7 +71,7 @@ def bookstore():
 
         count = math.ceil(total/9)
 
-        return render_template('bookstore.html', single=single, keyword=search, book_data=book_data, user=current_user.name, page=1, flag=flag, count=count)
+        return render_template('bookstore.html', hasSelected_cid=hasSelected_cid,single=single, keyword=search, book_data=book_data, user=current_user.name, page=1, flag=flag, count=count)
 
     elif 'cid' in request.args:
         cid = request.args['cid']
@@ -112,7 +118,7 @@ def bookstore():
         for j in range(start, end):
             final_data.append(book_data[j])
 
-        return render_template('bookstore.html', book_data=final_data, user=current_user.name, page=page, flag=flag, count=count)
+        return render_template('bookstore.html', hasSelected_cid=hasSelected_cid,book_data=final_data, user=current_user.name, page=page, flag=flag, count=count)
 
     elif 'keyword' in request.args:
         single = 1
@@ -140,7 +146,7 @@ def bookstore():
 
         count = math.ceil(total/9)
 
-        return render_template('bookstore.html', keyword=search, single=single, book_data=book_data, user=current_user.name, page=1, flag=flag, count=count)
+        return render_template('bookstore.html', hasSelected_cid=hasSelected_cid,keyword=search, single=single, book_data=book_data, user=current_user.name, page=1, flag=flag, count=count)
 
     else:
         book_row = Course.get_all_course()
@@ -156,7 +162,7 @@ def bookstore():
             if len(book_data) < 9:
                 book_data.append(book)
 
-        return render_template('bookstore.html', book_data=book_data, user=current_user.name, page=1, flag=flag, count=count)
+        return render_template('bookstore.html', hasSelected_cid=hasSelected_cid,book_data=book_data, user=current_user.name, page=1, flag=flag, count=count)
 
 
 # 加選
