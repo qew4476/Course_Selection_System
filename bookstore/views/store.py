@@ -178,16 +178,22 @@ def add():
 
             if (lesson_row == None):  # 如果沒選過的話，加選
                 Selerecord.add_course({'id': current_user.id, 'cid': cid})
+ 
 
-        # for i in book_row:
-        #     book = {
-        #         '課程編號': i[0],
-        #         '課程名稱': i[1],
-        #         '開課系所': i[2],
-        #         '教師姓名': Course.get_course_tname(i[0])
-        #     }
+
+
                 
     return redirect(url_for('bookstore.bookstore'))
+
+
+
+
+
+
+
+
+
+
 
 
 # 會員購物車

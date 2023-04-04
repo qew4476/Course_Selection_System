@@ -165,6 +165,9 @@ class Selerecord():
         sql = 'INSERT INTO SELERECORD VALUES (:id, :cid)'
         DB.execute_input(DB.prepare(sql), input)
         DB.commit()
+    def get_record(account):
+        sql = 'SELECT * FROM SELERECORD WHERE ACCOUNT = :id'
+        return DB.fetchall(DB.execute_input(DB.prepare(sql), {'id': account}))
 
 
 class Record():
