@@ -159,6 +159,24 @@ def bookstore():
         return render_template('bookstore.html', book_data=book_data, user=current_user.name, page=1, flag=flag, count=count)
 
 
+#選課功能
+@store.route('/add', methods=['GET','POST'])
+@login_required
+def add():
+    # 以防管理者誤闖
+    if request.method == 'GET':
+        if( current_user.role == 'manager'):
+            flash('No permission')
+            return redirect(url_for('manager.home'))
+    
+    #回傳有cid代表要加課
+    if request.method == 'POST':
+        if "cid" in request.form :
+            data = Cart.get_cart(current_user.id)
+            
+            if( data == None): #假如購物車裡面沒有他的資料
+                time = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+                Cart.add_cart(current_user.id, time)
 
 
 
