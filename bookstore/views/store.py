@@ -196,108 +196,158 @@ def selectPage():
             flash('No permission')
             return redirect(url_for('manager.home'))
 
+    if request.method =='POST':
         if "delete" in request.form:
+            cid = request.values.get('delete')  #要刪的課程編號
+            Selerecord.delete_course(current_user.id, cid)   
+                  
+
+    course_row = Selerecord.get_record(current_user.id)
+    course_data = []
+    for i in course_row:
+        cid = i[1]
+        tname = Course.get_course_tname(cid)
+        course = {
+            '課程編號': cid,
+            '課程名稱': Course.get_course(cid)[1],
+            '開課系所': Course.get_course(cid)[2],
+            '教師姓名': tname
+        }
+        course_data.append(course)
+
+    #課程資料顯示
+
+    return render_template('cart.html',user = current_user.name,data = course_data)
+
+# def only_SelePage():    #return 當下這名使用者的選課資料
+
+#     count = Selerecord.get_oneRecord(current_user.id)   #取得使用者一筆選課資料，用來判斷是否有選過課
+
+#     if (count == None):
+#         return 0
+#     course_row = Selerecord.get_record(current_user.id)
+#     course_data = []
+#     for i in course_row:
+#         cid = i[1]
+#         tname = Course.get_course_tname(cid)
+#         course = {
+#             '課程編號': cid,
+#             '課程名稱': Course.get_course(cid)[1],
+#             '開課系所': Course.get_course(cid)[2],
+#             '教師姓名': tname
+#         }
+#         course_data.append(course)
+
+#     return course_data
+
+
+
+def only_cart():
+
+    count = Cart.check(current_user.id)
+
+    if (count == None):
+        return 0
+
+    data = Cart.get_cart(current_user.id)
+    tno = data[2]
+    product_row = Record.get_record(tno)
+    product_data = []
+
+    for i in product_row:
+        pid = i[1]
+        pname = Product.get_name(i[1])
+        price = i[3]
+        amount = i[2]
+
+        product = {
+            '商品編號': pid,
+            '商品名稱': pname,
+            '商品價格': price,
+            '數量': amount
+        }
+        product_data.append(product)
+
+    return product_data
+
+
+
+
+
+
+# 會員購物車
+@store.route('/cart', methods=['GET', 'POST'])
+@login_required  # 使用者登入後才可以看
+def cart():
+
+    # 以防管理者誤闖
+    if request.method == 'GET':
+        if (current_user.role == 'manager'):
+            flash('No permission')
+            return redirect(url_for('manager.home'))
+
+    # 回傳有 pid 代表要 加商品
+    if request.method == 'POST':
+
+        if "pid" in request.form:
+            data = Cart.get_cart(current_user.id)
+
+            if (data == None):  # 假如購物車裡面沒有他的資料
+                time = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+                Cart.add_cart(current_user.id, time)  # 幫他加一台購物車
+                data = Cart.get_cart(current_user.id)
+
+            tno = data[2]  # 取得交易編號
+            pid = request.values.get('pid')  # 使用者想要購買的東西
+            # 檢查購物車裡面有沒有商品
+            product = Record.check_product(pid, tno)
+            # 取得商品價錢
+            price = Product.get_product(pid)[2]
+
+            # 如果購物車裡面沒有的話 把他加一個進去
+            if (product == None):
+                Record.add_product(
+                    {'id': tno, 'tno': pid, 'price': price, 'total': price})
+            else:
+                # 假如購物車裡面有的話，就多加一個進去
+                amount = Record.get_amount(tno, pid)
+                total = (amount+1)*int(price)
+                Record.update_product(
+                    {'amount': amount+1, 'tno': tno, 'pid': pid, 'total': total})
+
+        elif "delete" in request.form:
             pid = request.values.get('delete')
             tno = Cart.get_cart(current_user.id)[2]
 
             Member.delete_product(tno, pid)
+            product_data = only_cart()
 
+        elif "user_edit" in request.form:
+            change_order()
+            return redirect(url_for('bookstore.bookstore'))
 
+        elif "buy" in request.form:
+            change_order()
+            return redirect(url_for('bookstore.order'))
 
-    #課程資料
-    course_row = Course.get_all_course()
-    course_data = []
-    for i in course_row:
-        course = {
-            '課程編號': i[0],
-            '課程名稱': i[1],
-            '開課系所': i[2],
-            '教師姓名': Course.get_course_tname(i[0])
-        }
-        course_data.append(course)
-    return render_template('cart.html',user = current_user.name,data = course_data)
+        elif "order" in request.form:
+            tno = Cart.get_cart(current_user.id)[2]
+            total = Record.get_total_money(tno)
+            Cart.clear_cart(current_user.id)
 
+            time = str(datetime.now().strftime('%Y/%m/%d %H:%M:%S'))
+            format = 'yyyy/mm/dd hh24:mi:ss'
+            Order_List.add_order(
+                {'mid': current_user.id, 'time': time, 'total': total, 'format': format, 'tno': tno})
 
+            return render_template('complete.html', user=current_user.name)
 
+    product_data = only_cart()
 
-
-
-
-
-
-# # 會員購物車
-# @store.route('/cart', methods=['GET', 'POST'])
-# @login_required  # 使用者登入後才可以看
-# def cart():
-
-#     # 以防管理者誤闖
-#     if request.method == 'GET':
-#         if (current_user.role == 'manager'):
-#             flash('No permission')
-#             return redirect(url_for('manager.home'))
-
-#     # 回傳有 pid 代表要 加商品
-#     if request.method == 'POST':
-
-#         if "pid" in request.form:
-#             data = Cart.get_cart(current_user.id)
-
-#             if (data == None):  # 假如購物車裡面沒有他的資料
-#                 time = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
-#                 Cart.add_cart(current_user.id, time)  # 幫他加一台購物車
-#                 data = Cart.get_cart(current_user.id)
-
-#             tno = data[2]  # 取得交易編號
-#             pid = request.values.get('pid')  # 使用者想要購買的東西
-#             # 檢查購物車裡面有沒有商品
-#             product = Record.check_product(pid, tno)
-#             # 取得商品價錢
-#             price = Product.get_product(pid)[2]
-
-#             # 如果購物車裡面沒有的話 把他加一個進去
-#             if (product == None):
-#                 Record.add_product(
-#                     {'id': tno, 'tno': pid, 'price': price, 'total': price})
-#             else:
-#                 # 假如購物車裡面有的話，就多加一個進去
-#                 amount = Record.get_amount(tno, pid)
-#                 total = (amount+1)*int(price)
-#                 Record.update_product(
-#                     {'amount': amount+1, 'tno': tno, 'pid': pid, 'total': total})
-
-#         elif "delete" in request.form:
-#             pid = request.values.get('delete')
-#             tno = Cart.get_cart(current_user.id)[2]
-
-#             Member.delete_product(tno, pid)
-#             product_data = only_cart()
-
-#         elif "user_edit" in request.form:
-#             change_order()
-#             return redirect(url_for('bookstore.bookstore'))
-
-#         elif "buy" in request.form:
-#             change_order()
-#             return redirect(url_for('bookstore.order'))
-
-#         elif "order" in request.form:
-#             tno = Cart.get_cart(current_user.id)[2]
-#             total = Record.get_total_money(tno)
-#             Cart.clear_cart(current_user.id)
-
-#             time = str(datetime.now().strftime('%Y/%m/%d %H:%M:%S'))
-#             format = 'yyyy/mm/dd hh24:mi:ss'
-#             Order_List.add_order(
-#                 {'mid': current_user.id, 'time': time, 'total': total, 'format': format, 'tno': tno})
-
-#             return render_template('complete.html', user=current_user.name)
-
-#     product_data = only_cart()
-
-#     if product_data == 0:
-#         return render_template('empty.html', user=current_user.name)
-#     else:
-#         return render_template('cart.html', data=product_data, user=current_user.name)
+    if product_data == 0:
+        return render_template('empty.html', user=current_user.name)
+    else:
+        return render_template('cart.html', data=product_data, user=current_user.name)
 
 
 @store.route('/order')
@@ -376,30 +426,5 @@ def change_order():
     return 0
 
 
-def only_cart():
 
-    count = Cart.check(current_user.id)
 
-    if (count == None):
-        return 0
-
-    data = Cart.get_cart(current_user.id)
-    tno = data[2]
-    product_row = Record.get_record(tno)
-    product_data = []
-
-    for i in product_row:
-        pid = i[1]
-        pname = Product.get_name(i[1])
-        price = i[3]
-        amount = i[2]
-
-        product = {
-            '商品編號': pid,
-            '商品名稱': pname,
-            '商品價格': price,
-            '數量': amount
-        }
-        product_data.append(product)
-
-    return product_data

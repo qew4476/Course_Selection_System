@@ -31,22 +31,15 @@
         <!-- <th><center>數量</center></th> -->
         <th><center>退選</center></th>
       </tr>
-      {% for book in data %}
+      {% for lesson in data %}
       <tr>
-        <td> <center>{{ book.課程編號 }}</center></td>
-        <td> <center>{{ book.課程名稱 }}</center></td>
-        <td> <center>{{ book.開課系所 }}</center></td>
-        <td> <center>老師</center></td>
-
-        <!-- <td width="20%"> -->
-          <!-- <center>
-            <input class="form-control" type="number" onkeyup="value=value.replace(/[^\d]/g,'')" min="1" value="{{ book.數量 }}" name="{{ book.商品編號 }}">
-
-          </center>
-        </td> -->
+        <td> <center>{{ lesson.課程編號 }}</center></td>
+        <td> <center>{{ lesson.課程名稱 }}</center></td>
+        <td> <center>{{ lesson.開課系所 }}</center></td>
+        <td> <center>{{ lesson.教師姓名[0] }}</center></td>
         <td>
           <center>
-            <button class="btn btn-danger" type="submit" value="{{book.課程編號}}" name="delete" onclick="return (confirm('你確定要退選「{{ book.課程名稱 }}」 嗎？'))">
+            <button class="btn btn-danger" type="submit" value="{{lesson.課程編號}}" name="delete" onclick="return (confirm('你確定要退選「{{ lesson.課程名稱 }}」 嗎？'))">
               退選
             </button>
           </center>

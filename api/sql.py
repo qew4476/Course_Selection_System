@@ -121,6 +121,7 @@ class Course():
         return DB.fetchone(DB.execute_input(DB.prepare(sql), {'id': cid}))
 
 
+
 class Product():
     def count():
         sql = 'SELECT COUNT(*) FROM PRODUCT'
@@ -156,19 +157,26 @@ class Product():
 
 
 class Selerecord():
-    def check_course(userid, cid):
+    def check_course(userid, cid):  #檢查是否選過這門課
         sql = 'SELECT * FROM SELERECORD WHERE CID = :cid AND ACCOUNT = :id'
         return DB.fetchone(DB.execute_input(DB.prepare(sql), {'id': userid, 'cid': cid}))
         # user_id是account
+    def get_oneRecord(userid):  #檢查是否有選課
+        sql = 'SELECT * FROM SELERECORD WHERE ACCOUNT = :id'
+        return DB.fetchone(DB.execute_input(DB.prepare(sql), {'id': userid}))
 
     def add_course(input):
         sql = 'INSERT INTO SELERECORD VALUES (:id, :cid)'
         DB.execute_input(DB.prepare(sql), input)
         DB.commit()
-    def get_record(account):
+    def get_record(account):    #找出這個人選過的所有課
         sql = 'SELECT * FROM SELERECORD WHERE ACCOUNT = :id'
         return DB.fetchall(DB.execute_input(DB.prepare(sql), {'id': account}))
 
+    def delete_course(userid, cid):
+        sql = 'DELETE FROM SELERECORD WHERE CID = :cid AND ACCOUNT = :id'
+        DB.execute_input(DB.prepare(sql), {'id': userid, 'cid': cid})
+        DB.commit()
 
 class Record():
     def get_total_money(tno):
