@@ -107,12 +107,19 @@ class Course():
     def count():
         sql = 'SELECT COUNT(*) FROM COURSE'
         return DB.fetchone(DB.execute(DB.connect(), sql))
+
     def get_course(cid):
         sql = 'SELECT * FROM COURSE WHERE CID = :id'
         return DB.fetchone(DB.execute_input(DB.prepare(sql), {'id': cid}))
+
     def get_all_course():
         sql = 'SELECT * FROM COURSE'
         return DB.fetchall(DB.execute(DB.connect(), sql))
+
+    def get_course_tname(cid):
+        sql = 'SELECT tName FROM COURSE, TEACHER WHERE COURSE.tId = TEACHER.tId AND CID = :id'
+        return DB.fetchone(DB.execute_input(DB.prepare(sql), {'id': cid}))
+
 
 class Product():
     def count():

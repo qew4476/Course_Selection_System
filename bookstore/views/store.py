@@ -43,12 +43,14 @@ def bookstore():
         book_row = cursor.fetchall()
         book_data = []
         final_data = []
-        
+
+
         for i in book_row:
             book = {
                 '課程編號': i[0],
                 '課程名稱': i[1],
-                '開課系所': i[2]
+                '開課系所': i[2],
+                '教師姓名': Course.get_course_tname(i[0])
             }
             book_data.append(book)
             total = total + 1
@@ -72,16 +74,14 @@ def bookstore():
         cname = data[1]
         department = data[2]
         tid = data[3]   #教師編號
-        description = data[4]
-        image = 'sdg.jpg'
+        # description = data[4]
+        # image = 'sdg.jpg'
         
         product = {
             '課程編號': cid,
             '課程名稱': cname,
             '開課系所': department,
-            '教師編號': tid,
-            '課程敘述': description,
-            '課程圖片': image
+            '教師編號': tid            
         }
 
         return render_template('product.html', data = product, user=current_user.name)
@@ -99,7 +99,9 @@ def bookstore():
             book = {
                 '課程編號': i[0],
                 '課程名稱': i[1],
-                '開課系所': i[2]
+                '開課系所': i[2],
+                '教師姓名': Course.get_course_tname(i[0])
+
             }
             book_data.append(book)
             
@@ -126,7 +128,8 @@ def bookstore():
             book = {
                 '課程編號': i[0],
                 '課程名稱': i[1],
-                '開課系所': i[2]
+                '開課系所': i[2],
+                '教師姓名': Course.get_course_tname(i[0])
             }
 
             book_data.append(book)
@@ -148,6 +151,7 @@ def bookstore():
                 '課程編號': i[0],
                 '課程名稱': i[1],
                 '開課系所': i[2],
+                '教師姓名': Course.get_course_tname(i[0])
             }
             if len(book_data) < 9:
                 book_data.append(book)
