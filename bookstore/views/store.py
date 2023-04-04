@@ -24,7 +24,7 @@ def bookstore():
     count = math.ceil(result[0]/9)
     flag = 0
 
-    # 若為管理者則轉到管理者頁面
+    # 若為管理者則不許進入
     if request.method == 'GET':
         if (current_user.role == 'manager'):
             flash('No permission')

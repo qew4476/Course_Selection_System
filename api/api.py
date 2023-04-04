@@ -35,14 +35,11 @@ def login():
         account = request.form['account']
         password = request.form['password']
         data = Student.get_student(account)
-
         try:
             DB_password = data[0][1]
             user_id = account
-            identity = data[0][6]
-            #print identity with flash message
-            
-
+            identity = data[0][2]
+            # print identity with flash message
 
         except:
             flash('*沒有此帳號')
