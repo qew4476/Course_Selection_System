@@ -20,7 +20,7 @@
 <br/>
 <div class="container-xl">
   <br/>
-  <form method="post" action={{ url_for('bookstore.cart') }}>
+  <form method="post" action={{ url_for('bookstore.selectPage') }}>
     <table class="table table-bordered">
       <tr>
         <th><center>課程編號</center></th>
@@ -33,9 +33,9 @@
       </tr>
       {% for book in data %}
       <tr>
-        <td> <center>{{ book.商品編號 }}</center></td>
-        <td> <center>{{ book.商品名稱 }}</center></td>
-        <td> <center>{{ book.商品價格 }}</center></td>
+        <td> <center>{{ book.課程編號 }}</center></td>
+        <td> <center>{{ book.課程名稱 }}</center></td>
+        <td> <center>{{ book.開課系所 }}</center></td>
         <td> <center>老師</center></td>
 
         <!-- <td width="20%"> -->
@@ -46,7 +46,7 @@
         </td> -->
         <td>
           <center>
-            <button class="btn btn-danger" type="submit" value="{{book.商品編號}}" name="delete" onclick="return (confirm('你確定要刪除 \'{{ book.商品名稱 }}\' 嗎？'))">
+            <button class="btn btn-danger" type="submit" value="{{book.課程編號}}" name="delete" onclick="return (confirm('你確定要退選「{{ book.課程名稱 }}」 嗎？'))">
               退選
             </button>
           </center>
@@ -54,12 +54,12 @@
       </tr>
       {% endfor %}
     </table>
-    <center>
+    <!-- <center>
       <div class="option">
         <button class="btn btn-primary" type="submit" value="edit" name="user_edit" >繼續購物</button>
         <button class="btn btn-success" type="submit" value="edit" name="buy" >直接結帳</button>
       </div>
-    </center>
+    </center> -->
 
 
   </form>
