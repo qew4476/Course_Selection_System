@@ -24,7 +24,7 @@ def bookstore():
     count = math.ceil(result[0]/9)
     flag = 0
 
-    # 若為管理者則不許進入
+    # 若為管理者則無法進入
     if request.method == 'GET':
         if (current_user.role == 'manager'):
             flash('No permission')
@@ -174,10 +174,26 @@ def add():
         if "cid" in request.form:
 
             cid = request.values.get('cid')  # 使用者想要加選的課程編號
-            lesson = Selerecord.check_course(
-                current_user.id, cid)  # 檢查使用者是否已經選過這門課
-            if (lesson == None):  # 如果沒選過的話，加選
+            lesson_row = Selerecord.check_course(current_user.id, cid)  # 檢查使用者是否已經選過這門課
+
+            if (lesson_row == None):  # 如果沒選過的話，加選
                 Selerecord.add_course({'id': current_user.id, 'cid': cid})
+            else:
+                for i in lesson_row:
+                    lesson = {
+                    '選課帳號': i[0],
+                    '課程編號': i[1],
+                    }
+
+
+        # for i in book_row:
+        #     book = {
+        #         '課程編號': i[0],
+        #         '課程名稱': i[1],
+        #         '開課系所': i[2],
+        #         '教師姓名': Course.get_course_tname(i[0])
+        #     }
+                
     return redirect(url_for('bookstore.bookstore'))
 
 
