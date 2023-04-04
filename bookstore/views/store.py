@@ -178,13 +178,6 @@ def add():
 
             if (lesson_row == None):  # 如果沒選過的話，加選
                 Selerecord.add_course({'id': current_user.id, 'cid': cid})
-            else:
-                for i in lesson_row:
-                    lesson = {
-                    '選課帳號': i[0],
-                    '課程編號': i[1],
-                    }
-
 
         # for i in book_row:
         #     book = {
