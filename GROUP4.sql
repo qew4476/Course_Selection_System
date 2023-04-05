@@ -34,3 +34,19 @@ CREATE TABLE SeleRecord(
     FOREIGN KEY (Account) REFERENCES Student(Account),
     FOREIGN KEY (cID) REFERENCES Course(cID)
 );
+
+INSERT INTO TEACHER VALUES('T003', '楊大明');
+INSERT INTO TEACHER VALUES('T004', '陳小明');
+INSERT INTO TEACHER VALUES('T001', '林大章');
+INSERT INTO TEACHER VALUES('T012', '張恩普');
+
+INSERT INTO COURSE 
+    VALUES('CS102', '離散數學', '資訊工程學系', 'T003');
+INSERT INTO COURSE
+    VALUES('CS103', '資料結構', '資訊工程學系', 'T003');
+INSERT INTO COURSE
+    VALUES('EE111', '電子學', '電機工程學系', 'T004');
+INSERT INTO COURSE
+    VALUES('EE112', '電路學', '電機工程學系', 'T004');
+INSERT INTO COURSE
+    VALUES('AA105', '會計學', '會計學系', 'T012');    

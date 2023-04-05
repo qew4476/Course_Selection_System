@@ -46,14 +46,15 @@
         <div class="card">
           <div class="card-body">
             <h5 class="card-title">{{book.課程名稱}}</h5>
-                        <!-- book是指課程 -->
+            <!-- book是指課程 -->
             <p class="card-text">{{book.課程編號}} {{book.開課系所}} </p>
             <p>開課教師：{{ book.教師姓名[0] }}</p>
-            
-            {% if book.課程編號 in hasSelected_cid  %}
-              <button class="btn btn-outline-success" type="submit" value="{{book.課程編號}}" name="cid" style="background-color:rgb(131, 187, 242)" disabled>已選課</button>
+
+            {% if book.課程編號 in hasSelected_cid %}
+            <button class="btn btn-outline-success" type="submit" value="{{book.課程編號}}" name="cid"
+              style="background-color:rgb(131, 187, 242)" disabled>已選課</button>
             {% else %}
-              <button class="btn btn-outline-success" type="submit" value="{{book.課程編號}}" name="cid" >選課</button>
+            <button class="btn btn-outline-success" type="submit" value="{{book.課程編號}}" name="cid">選課</button>
             {% endif %}
           </div>
         </div>
@@ -108,6 +109,7 @@
   </nav>
 
 
+  ioij
 
 </div>
 
