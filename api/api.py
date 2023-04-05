@@ -84,7 +84,14 @@ def register():
                 'password': request.form['password'],
                 'identity': request.form['identity']
             }
+            input2 = {
+                'id': request.form['id'],
+                'phone': request.form['phone'],
+                'contname': request.form['contName'],
+                'account': user_account
+            }
             Student.create_student(input)
+            Contact.create_contact(input2)
             return redirect(url_for('api.login'))
 
     return render_template('register.html')

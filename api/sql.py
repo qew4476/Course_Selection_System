@@ -82,6 +82,12 @@ class Member():
         sql = 'SELECT IDENTITY, NAME FROM MEMBER WHERE MID = :id '
         return DB.fetchone(DB.execute_input(DB.prepare(sql), {'id': userid}))
 
+class Contact():
+    def create_contact(input):
+        sql = 'INSERT INTO CONTACT VALUES (:id, :phone, :contname,:account)'
+        DB.execute_input(DB.prepare(sql), input)
+        DB.commit()
+
 
 class Cart():
     def check(user_id):

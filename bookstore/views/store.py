@@ -57,6 +57,7 @@ def bookstore():
                 '課程編號': i[0],
                 '課程名稱': i[1],
                 '開課系所': i[2],
+                '教室': i[4],
                 '教師姓名': Course.get_course_tname(i[0])
             }
             book_data.append(book)
@@ -87,6 +88,7 @@ def bookstore():
             '課程編號': cid,
             '課程名稱': cname,
             '開課系所': department,
+            '教室': i[4],
             '教師編號': tid
         }
 
@@ -106,6 +108,7 @@ def bookstore():
                 '課程編號': i[0],
                 '課程名稱': i[1],
                 '開課系所': i[2],
+                '教室': i[4],
                 '教師姓名': Course.get_course_tname(i[0])
 
             }
@@ -135,6 +138,7 @@ def bookstore():
                 '課程編號': i[0],
                 '課程名稱': i[1],
                 '開課系所': i[2],
+                '教室': i[4],
                 '教師姓名': Course.get_course_tname(i[0])
             }
 
@@ -157,6 +161,7 @@ def bookstore():
                 '課程編號': i[0],
                 '課程名稱': i[1],
                 '開課系所': i[2],
+                '教室': i[4],
                 '教師姓名': Course.get_course_tname(i[0])
             }
             if len(book_data) < 9:
