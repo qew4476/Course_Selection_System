@@ -86,7 +86,10 @@
             <div class="d-flex flex-row mb-3">
                 <i class="fa-sharp fa-solid fa-book"></i>
                 <a class="navbar-brand" href="#">中山選課系統</a>
-
+                <div><i class="fa-solid fa-user"></i></div>
+                <ul style=" color:rgb(255, 255, 255) " class="navbar-nav me-3 mb-2 mb-lg-0">
+                    <li color:white;list-style-type:none>使用者姓名：{{user}}</li>
+                </ul>
             </div>
 
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarsExample01"
@@ -139,10 +142,7 @@
                 </form>
                 <br>
                 <div style=" float: right;color:rgb(255, 255, 255)" class="d-flex flex-row mb-3">
-                    <div><i class="fa-solid fa-user"></i></div>
-                    <ul style=" float: right;color:rgb(255, 255, 255) " class="navbar-nav me-3 mb-2 mb-lg-0">
-                        <li color:white;list-style-type:none>學生姓名：{{user}}</li>
-                    </ul>
+
                     <a href=" {{ url_for('api.logout') }}"><button class="btn btn-danger"
                             type="submit">登出系統</button></a>
 
