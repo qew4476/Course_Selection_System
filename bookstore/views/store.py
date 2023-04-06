@@ -45,7 +45,7 @@ def bookstore():
         search = request.values.get('keyword')
         keyword = search
 
-        cursor.prepare('SELECT * FROM COURSE WHERE CNAME LIKE :search')
+        cursor.prepare('SELECT * FROM COURSE WHERE CNAME LIKE :search OR DEPARTMENT LIKE :search OR TID LIKE :search OR CID LIKE :search')
         cursor.execute(None, {'search': '%' + keyword + '%'})
         book_row = cursor.fetchall()
         book_data = []
@@ -127,7 +127,7 @@ def bookstore():
         single = 1
         search = request.values.get('keyword')
         keyword = search
-        cursor.prepare('SELECT * FROM COURSE WHERE CNAME LIKE :search')
+        cursor.prepare('SELECT * FROM COURSE WHERE CNAME LIKE :search OR DEPARTMENT LIKE :search OR TID LIKE :search OR CID LIKE :search')
         cursor.execute(None, {'search': '%' + keyword + '%'})
         book_row = cursor.fetchall()
         book_data = []

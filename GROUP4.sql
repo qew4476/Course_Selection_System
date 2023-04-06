@@ -52,21 +52,21 @@ CREATE TABLE SeleRecord(
     FOREIGN KEY (cID) REFERENCES Course(cID)
 );
 
-INSERT INTO TEACHER VALUES('T003', '楊大明');
-INSERT INTO TEACHER VALUES('T004', '陳小明');
-INSERT INTO TEACHER VALUES('T001', '林大章');
-INSERT INTO TEACHER VALUES('T012', '張恩普');
+INSERT INTO TEACHER VALUES('T003', '楊大???');
+INSERT INTO TEACHER VALUES('T004', '?��小�??');
+INSERT INTO TEACHER VALUES('T001', '??�大�?');
+INSERT INTO TEACHER VALUES('T012', '張恩?��');
 
 INSERT INTO COURSE 
-    VALUES('CS102', '離散數學', '資訊工程學系', 'T003');
+    VALUES('CS102', '?��?��?���?', '資�?�工程學�?', 'T003');
 INSERT INTO COURSE
-    VALUES('CS103', '資料結構', '資訊工程學系', 'T003');
+    VALUES('CS103', '資�?��?��??', '資�?�工程學�?', 'T003');
 INSERT INTO COURSE
-    VALUES('EE111', '電子學', '電機工程學系', 'T004');
+    VALUES('EE111', '?��子學', '?��機工程學�?', 'T004');
 INSERT INTO COURSE
-    VALUES('EE112', '電路學', '電機工程學系', 'T004');
+    VALUES('EE112', '?��路學', '?��機工程學�?', 'T004');
 INSERT INTO COURSE
-    VALUES('AA105', '會計學', '會計學系', 'T012');    
+    VALUES('AA105', '??��?�學', '??��?�學�?', 'T012');    
 
 
 INSERT INTO Classroom
@@ -90,3 +90,12 @@ INSERT INTO Classroom
 INSERT INTO Classroom
     VALUES('R010', 100);
 
+
+ALTER TABLE SELERECORD ADD FOREIGN KEY (cId) REFERENCES Course(cId)
+    ON DELETE CASCADE
+    
+
+
+ALTER TABLE SELERECORD
+MODIFY CONSTRAINT recTocourse 
+ON UPDATE CASCADE;
