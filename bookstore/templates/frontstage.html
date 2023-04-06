@@ -37,17 +37,20 @@
             font-size: 3.5rem;
         }
     }
+
     footer {
         border-top: solid 1px #c9c9c9;
         padding: 30px 0px;
         height: 250px;
 
     }
-    footer h4{
-        margin-bottom: 25px ;
+
+    footer h4 {
+        margin-bottom: 25px;
     }
-    footer p{
-        margin-bottom: 20px ;
+
+    footer p {
+        margin-bottom: 20px;
     }
 
     .fa-book {
@@ -55,55 +58,59 @@
         margin-top: 12px;
         font-size: 31px;
     }
+
     .fa-user {
-            margin-right: 10px;
+        margin-right: 10px;
     }
+
     .navbar-brand {
-        font-size : 30px;
+        font-size: 30px;
     }
-    .dropdown-toggle{
+
+    .dropdown-toggle {
         color: white;
     }
 
-    .dropdown-toggle:hover{
-        font-size:150%;
+    .dropdown-toggle:hover {
+        font-size: 150%;
         color: #F9C70B;
-        text-decoration:underline;
+        text-decoration: underline;
     }
-
-
 </style>
 
 <body class="bg-light">
 
-    
- <nav class="navbar navbar-dark bg-success " aria-label="First navbar example">
-    <div class="container-fluid ">
-        <div class="d-flex flex-row mb-3"> 
-            <i class="fa-sharp fa-solid fa-book"></i>
-            <a class="navbar-brand" href="#">中山選課系統</a>
 
-        </div>
+    <nav class="navbar navbar-dark bg-success " aria-label="First navbar example">
+        <div class="container-fluid ">
+            <div class="d-flex flex-row mb-3">
+                <i class="fa-sharp fa-solid fa-book"></i>
+                <a class="navbar-brand" href="#">中山選課系統</a>
 
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarsExample01" aria-controls="navbarsExample01" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
+            </div>
 
-      <div class="collapse navbar-collapse" id="navbarsExample01">
-     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-            <li class="nav-item">
-                <a class="nav-link" href="{{ url_for('bookstore.bookstore') }}">課程導覽</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="{{ url_for('bookstore.selectPage') }}">選課結果查詢</a>
-            </li>                 
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarsExample01"
+                aria-controls="navbarsExample01" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
 
-        </ul>
+            <div class="collapse navbar-collapse" id="navbarsExample01">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link" style="color:rgb(255, 255, 255);float:right"
+                            href="{{ url_for('bookstore.bookstore') }}">課程導覽</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" style="color:rgb(255, 255, 255);float:right"
+                            href="{{ url_for('bookstore.selectPage') }}">選課結果查詢</a>
+                    </li>
 
- 
-        <form  action="{{ url_for('bookstore.bookstore', keyword=1 ) }}">
+                </ul>
 
-                <!-- <li class="nav-item dropdown">
+
+                <form action="{{ url_for('bookstore.bookstore', keyword=1 ) }}">
+
+                    <!-- <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-bs-toggle="dropdown" aria-expanded="false">請選擇科系</a>
                     <ul class="dropdown-menu" aria-labelledby="dropdown01">
                         <li><a name="department1" class="dropdown-item" href="#">會計學系</a></li>
@@ -113,8 +120,8 @@
                         <li><a name="department5" class="dropdown-item" href="#">電機工程學系</a></li>
                     </ul>
               </li> -->
-              
-            <!-- <div class="input-group">
+
+                    <!-- <div class="input-group">
                 <span class="input-group-text" id="basic-addon1">
                     <i class="fa-solid fa-magnifying-glass"></i>
                 </span>
@@ -129,19 +136,20 @@
             </div> -->
 
 
-          </form>
-        <br>
-        <div class="d-flex flex-row mb-3"> 
-        <div ><i class="fa-solid fa-user"></i></div>
-        <ul class="navbar-nav me-3 mb-2 mb-lg-0">
-            <li style="color:white;list-style-type:none">學生名字：{{user}}</li>
-        </ul>
+                </form>
+                <br>
+                <div style=" float: right;color:rgb(255, 255, 255)" class="d-flex flex-row mb-3">
+                    <div><i class="fa-solid fa-user"></i></div>
+                    <ul style=" float: right;color:rgb(255, 255, 255) " class="navbar-nav me-3 mb-2 mb-lg-0">
+                        <li color:white;list-style-type:none>學生姓名：{{user}}</li>
+                    </ul>
+                    <a href=" {{ url_for('api.logout') }}"><button class="btn btn-danger"
+                            type="submit">登出系統</button></a>
+
+                </div>
+            </div>
         </div>
-        <a href="{{ url_for('api.logout') }}"><button class="btn btn-danger"
-                type="submit">登出系統</button></a>
-      </div>
-    </div>
-  </nav>
+    </nav>
     {% block content %}
     {% endblock content %}
 </body>
@@ -154,7 +162,7 @@
                     <h4>主旨</h4>
                     <p>最好的選課系統!!!</p>
                 </div>
-                
+
             </div>
 
             <div class="col-md-6">
@@ -165,7 +173,7 @@
                     <p>Email: sktt1fakerisgod@gmail.com</p>
                 </div>
             </div>
-        </div>   
+        </div>
     </div>
 </footer>
 
