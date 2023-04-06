@@ -6,13 +6,16 @@
 {% block content %}
 
 <div class="my-3 p-3 bg-body rounded shadow-sm">
+  
   <!-- Dashboard -->
+  <!--
   <div id="dashboard">
     <nav>
       <div class="nav nav-tabs" id="nav-tab" role="tablist">
         <button class="nav-link active" id="nav-home-tab" data-bs-toggle="tab" data-bs-target="#nav-home" type="button" role="tab" aria-controls="nav-home" aria-selected="true">訂單數量分析</button>
         <button class="nav-link" id="nav-profile-tab" data-bs-toggle="tab" data-bs-target="#nav-profile" type="button" role="tab" aria-controls="nav-profile" aria-selected="false">書本銷量分類</button>
-        <button class="nav-link" id="nav-contact-tab" data-bs-toggle="tab" data-bs-target="#nav-contact" type="button" role="tab" aria-controls="nav-contact" aria-selected="false">消費總額排名</button>        
+        <button class="nav-link" id="nav-contact-tab" data-bs-toggle="tab" data-bs-target="#nav-contact" type="button" role="tab" aria-controls="nav-contact" aria-selected="false">消費總額排名</button> 
+        <button class="nav-link" id="nav-course-tab" data-bs-toggle="tab" data-bs-target="#nav-course" type="button" role="tab" aria-controls="nav-course" aria-selected="false">修課學院分佈</button> 
       </div>      
     </nav>
   </div>
@@ -34,10 +37,12 @@
       </center>
     </div>
   </div>
+  -->
 </div>
 
 <script>
   // 以長條圖與折線圖分析各月訂單
+  /*
   var chartDoma = document.getElementById('maina');
   var myCharta = echarts.init(chartDoma);
   var data = {{revenue|tojson}};
@@ -79,7 +84,8 @@
       show: true
     },
   };
-
+  */
+ 
   // 以圓餅圖分析書本銷量
   var chartDomb = document.getElementById('mainb');
   var myChartb = echarts.init(chartDomb);
@@ -106,6 +112,7 @@
   };
 
   // 使用動態長條圖查看消費總額最多的使用者
+  /*
   var chartDomc = document.getElementById('mainc');
   var myChartc = echarts.init(chartDomc);
   var data = {{datac|tojson}};
@@ -183,7 +190,7 @@
   optiona && myCharta.setOption(optiona);
   optionb && myChartb.setOption(optionb);
   optionc && myChartc.setOption(optionc);
-      
+   */   
 </script>
 
 {% endblock content %}

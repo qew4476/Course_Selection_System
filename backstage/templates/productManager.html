@@ -3,7 +3,7 @@
 {{ super() }}
 {% endblock head %}
 
-{% block title %} 商品管理 {% endblock title %}
+{% block title %} 課程管理 {% endblock title %}
 
 {% block content %}
 
@@ -51,10 +51,10 @@
             <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
           </svg>
         </span>
-        <input class="form-control me-2" id="keyword" placeholder="搜尋商品" aria-label="Search">
+        <input class="form-control me-2" id="keyword" placeholder="搜尋課程" aria-label="Search">
     </div>
     <button type="button" class="btn btn-outline-success" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
-        新增商品
+        新增課程
     </button>
 </div>
 
@@ -63,35 +63,49 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="staticBackdropLabel">新增商品</h5>
+                    <h5 class="modal-title" id="staticBackdropLabel">新增課程</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
                     <div class="mb-3">
-                        <label for="inputProductName" class="form-label">商品名稱</label>
+                        <label for="inputProductName" class="form-label">課程名稱</label>
                         <input type="text" class="form-control" id="inputProductName" name="name" required>
                     </div>
                     <div class="mb-3">
-                        <label for="inputUnitPrice" class="form-label">商品單價</label>
-                        <input type="number" class="form-control" id="inputUnitPrice" name="price" required>
+                        <label for="inputUnitPrice" class="form-label">教師編號</label>
+                        <input type="text" class="form-control" id="inputUnitPrice" name="tid" required>
                     </div>
                     <div class="mb-3">
-                        <label for="inputProductCategory" class="form-label">商品種類</label>
-                        <select id="inputProductCategory" class="form-select" name="category" required>
-                            <option selected disabled value="">請選擇類型</option>
-                            <option value="BOOK">BOOK</option>
-                            <option value="CD">CD</option>
-                            <option value="DVD">DVD</option>
+                        <label for="inputProductCategory" class="form-label">開課系所</label>
+                        <select id="inputProductCategory" class="form-select" name="department" required>
+                            <option selected disabled value="">請選擇系所</option>
+                            <option value="資訊管理學系">資管系</option>
+                            <option value="資訊工程學系">資工系</option>
+                            <option value="電機工程學系">電機系</option>
+                            <option value="會計學系">會計學系</option>
+                            <option value="法律學系">法律學系</option>
+                            <option value="機械工程學系">機械工程學系</option>
+                            <option value="工商管理學系">工商管理學系</option>
+                            <option value="財務金融學系">財務金融學系</option>
+                            <option value="吼哩系">吼哩系</option>
                         </select>
                     </div>
                     <div class="mb-3">
-                        <label for="inputProductDesc" class="form-label">商品敘述</label>
-                        <textarea class="form-control" id="inputProductDesc" name="description" required></textarea>
+                        <label for="inputCourseRoom" class="form-label">教室代碼</label>
+                        <select id="inputCourseRoom" class="form-select" name="roomid" required>
+                            <option selected disabled value="">請選擇教室</option>
+                            <option value="R001">R001</option>
+                            <option value="R002">R002</option>
+                            <option value="R003">R003</option>
+                            <option value="R004">R004</option>
+                            <option value="R005">R005</option>
+                            <option value="R006">R006</option>
+                            <option value="R007">R007</option>
+                            <option value="R008">R008</option>
+                            <option value="R009">R009</option>
+                            <option value="R010">R010</option>
+                        </select>
                     </div>
-                    <!-- <div class="mb-3">
-                        <label for="inputProductImg" class="form-label">商品圖片</label><br/>
-                        <input type="file" name="file" id="file-uploader" data-target="file-uploader" required/>
-                    </div> -->
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-danger" data-bs-dismiss="modal">取消</button>
@@ -110,22 +124,22 @@
 <table id="manager" class="table table-bordered">
     <thead>
         <tr>
-            <th width="10%"><center>商品編號</center></th>
-            <th width="20%"><center>商品名稱</center></th>
-            <th width="15%"><center>商品單價</center></th>
-            <th width="15%"><center>商品類別</center></th>
+            <th width="10%"><center>課程編號</center></th>
+            <th width="20%"><center>課程名稱</center></th>
+            <th width="15%"><center>教師姓名</center></th>
+            <th width="15%"><center>開課系所</center></th>
             <th colspan="2"><center>資料操作</center></th>
         </tr>
     </thead>
-    <tbody id="product">
+    <tbody id="course">
     {% for i in book_data %}
         <tr>
-            <td><center>{{ i.商品編號 }}</center></td>
-            <td><center>{{ i.商品名稱 }}</center></td>
-            <td><center>{{ i.商品售價 }}</center></td>
-            <td><center>{{ i.商品類別 }}</center></td>
-            <td><center><button type="submit" value="{{i.商品編號}}" name="edit" class="btn btn-success">編輯商品</button></center></td>
-            <td><center><button type="submit" value="{{i.商品編號}}" name="delete" onclick="return (confirm('你確定要刪除 \'{{ i.商品名稱 }}\' 嗎？'))" class="btn btn-danger">刪除商品</button></center></td>
+            <td><center>{{ i.課程編號 }}</center></td>
+            <td><center>{{ i.課程名稱 }}</center></td>
+            <td><center>{{ i.教師姓名[0] }}</center></td>
+            <td><center>{{ i.開課系所 }}</center></td>
+            <td><center><button type="submit" value="{{i.課程編號}}" name="edit" class="btn btn-success">編輯課程</button></center></td>
+            <td><center><button type="submit" value="{{i.課程編號}}" name="delete" onclick="return (confirm('確定要刪除 \'{{ i.課程名稱 }}\' 嗎？'))" class="btn btn-danger">刪除課程</button></center></td>
         </tr>
     {% endfor %}
     </tbody>

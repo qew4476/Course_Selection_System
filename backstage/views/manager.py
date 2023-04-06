@@ -1,3 +1,8 @@
+#CRUD
+#Create: 管理者可新增課程到系統上
+#Read: 管理者可以讀取各個課程及其資料 暫時還沒有
+#Update: 管理者更新課程內容
+#Delete: 管理者刪除某課程或是其中內容
 from flask import Blueprint, render_template, request, url_for, redirect, flash
 from flask_login import LoginManager, UserMixin, login_user, logout_user, login_required, current_user
 from link import *
@@ -30,35 +35,36 @@ def productManager():
             return redirect(url_for('index'))
         
     if 'delete' in request.values:
-        pid = request.values.get('delete')
-        data = Record.delete_check(pid)
+        cid = request.values.get('delete')
+        data = Record.delete_check(cid)
         
         if(data != None):
             flash('failed')
         else:
-            data = Product.get_product(pid)
-            Product.delete_product(pid)
+            data = Product.get_course(cid)
+            Product.delete_course(cid)
     
     elif 'edit' in request.values:
-        pid = request.values.get('edit')
-        return redirect(url_for('manager.edit', pid=pid))
+        cid = request.values.get('edit')
+        return redirect(url_for('manager.edit', cid = cid))
     
     book_data = book()
     return render_template('productManager.html', book_data = book_data, user=current_user.name)
 
 def book():
-    book_row = Product.get_all_product()
+    book_row = Product.get_all_course()
     book_data = []
     for i in book_row:
         book = {
-            '商品編號': i[0],
-            '商品名稱': i[1],
-            '商品售價': i[2],
-            '商品類別': i[3]
-        }
+                '課程編號': i[0],
+                '課程名稱': i[1],
+                '開課系所': i[2],
+                '教師姓名': Course.get_course_tname(i[0]),
+                '教室代號': i[4]
+            }
         book_data.append(book)
     return book_data
-
+#新增課程
 @manager.route('/add', methods=['GET', 'POST'])
 def add():
     if request.method == 'POST':
@@ -66,23 +72,23 @@ def add():
         while(data != None):
             number = str(random.randrange( 10000, 99999))
             en = random.choice(string.ascii_letters)
-            pid = en + number
-            data = Product.get_product(pid)
+            cid = en + number
+            data = Product.get_course(cid)                             #這行為原始code用來跳離迴圈的條件，懶得修掉，data可以忽略
 
         name = request.values.get('name')
-        price = request.values.get('price')
-        category = request.values.get('category')
-        description = request.values.get('description')
+        department = request.values.get('department')
+        tid = request.values.get('tid')
+        roomid = request.values.get('roomid')
 
-        if (len(name) < 1 or len(price) < 1):
+        if (len(name) < 1):
             return redirect(url_for('manager.productManager'))
         
-        Product.add_product(
-            {'pid' : pid,
-             'name' : name,
-             'price' : price,
-             'category' : category,
-             'description':description
+        Product.add_course(
+            {'cid' : cid,
+             'cName' : name,
+             'department' : department,
+             'tid' : tid,
+             'roomid' : roomid
             }
         )
 
@@ -99,37 +105,37 @@ def edit():
             return redirect(url_for('bookstore'))
 
     if request.method == 'POST':
-        Product.update_product(
+        Product.update_course(
             {
-            'name' : request.values.get('name'),
-            'price' : request.values.get('price'),
-            'category' : request.values.get('category'), 
-            'description' : request.values.get('description'),
-            'pid' : request.values.get('pid')
+            'cid' : request.values.get('cid'),
+            'cName' : request.values.get('cname'),
+            'department' : request.values.get('department'),
+            'tid' : request.values.get('tid'),
+            'roomid' : request.values.get('roomid')
             }
         )
         
         return redirect(url_for('manager.productManager'))
 
     else:
-        product = show_info()
-        return render_template('edit.html', data=product)
+        course = show_info()
+        return render_template('edit.html', data = course)
 
 
 def show_info():
-    pid = request.args['pid']
-    data = Product.get_product(pid)
-    pname = data[1]
-    price = data[2]
-    category = data[3]
-    description = data[4]
+    cid = request.args['cid']
+    data = Product.get_course(cid)
+    cname = data[1]
+    department = data[2]
+    tid = data[3]
+    roomid = data[4]
 
     product = {
-        '商品編號': pid,
-        '商品名稱': pname,
-        '單價': price,
-        '類別': category,
-        '商品敘述': description
+        '課程編號': cid,
+        '課程名稱': cname,
+        '開課系所': department,
+        '教師代碼': tid,
+        '教室代碼': roomid,
     }
     return product
 

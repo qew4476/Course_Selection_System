@@ -123,43 +123,41 @@ class Course():
         return DB.fetchall(DB.execute(DB.connect(), sql))
 
     def get_course_tname(cid):
-        sql = 'SELECT tName FROM COURSE, TEACHER WHERE COURSE.tId = TEACHER.tId AND CID = :id'
+        sql = 'SELECT tName FROM COURSE, TEACHER WHERE COURSE.tId = TEACHER.tId AND cID = :id'
         return DB.fetchone(DB.execute_input(DB.prepare(sql), {'id': cid}))
 
 
 
+#############課程
 class Product():
     def count():
-        sql = 'SELECT COUNT(*) FROM PRODUCT'
+        sql = 'SELECT COUNT(*) FROM COURSE'
         return DB.fetchone(DB.execute(DB.connect(), sql))
 
-    def get_product(pid):
-        sql = 'SELECT * FROM PRODUCT WHERE PID = :id'
-        return DB.fetchone(DB.execute_input(DB.prepare(sql), {'id': pid}))
+    def get_course(cid):
+        sql = 'SELECT * FROM COURSE WHERE CID = :id'
+        return DB.fetchone(DB.execute_input(DB.prepare(sql), {'id': cid}))
 
-    def get_all_product():
-        sql = 'SELECT * FROM PRODUCT'
+    def get_all_course():
+        sql = 'SELECT * FROM COURSE'
         return DB.fetchall(DB.execute(DB.connect(), sql))
 
-    def get_name(pid):
-        sql = 'SELECT PNAME FROM PRODUCT WHERE PID = :id'
-        return DB.fetchone(DB.execute_input(DB.prepare(sql), {'id': pid}))[0]
-
-    def add_product(input):
-        sql = 'INSERT INTO PRODUCT VALUES (:pid, :name, :price, :category, :description)'
+    def add_course(input):
+        sql = 'INSERT INTO COURSE VALUES (:cid, :cName, :department, :tid, :roomid)'
 
         DB.execute_input(DB.prepare(sql), input)
         DB.commit()
 
-    def delete_product(pid):
-        sql = 'DELETE FROM PRODUCT WHERE PID = :id '
-        DB.execute_input(DB.prepare(sql), {'id': pid})
+    def delete_course(cid):
+        sql = 'DELETE FROM COURSE WHERE CID = :id '
+        DB.execute_input(DB.prepare(sql), {'id': cid})
         DB.commit()
 
-    def update_product(input):
-        sql = 'UPDATE PRODUCT SET PNAME=:name, PRICE=:price, CATEGORY=:category, PDESC=:description WHERE PID=:pid'
+    def update_course(input):
+        sql = 'UPDATE COURSE SET CNAME=:cName, DEPARTMENT=:department, TID=:tid, ROOMID=:roomid WHERE CID=:cid'
         DB.execute_input(DB.prepare(sql), input)
         DB.commit()
+
 
 
 class Selerecord():

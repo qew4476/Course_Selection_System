@@ -57,3 +57,16 @@ def dashboard():
         countList.append(i[0])
         
     return render_template('dashboard.html', counter = counter, revenue = revenue, dataa = dataa, datab = datab, datac = datac, nameList = nameList, countList = countList)
+
+@analysis.route('/distribute')
+@login_required
+def distribute():
+    row = Analysis.category_sale()
+    datab = []
+    for i in row:
+        temp = {
+            'value': i[0],
+            'name': i[1]
+        }
+        datab.append(temp)
+    return render_template('dashboard.html', datab = datab)

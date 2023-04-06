@@ -16,57 +16,54 @@
     <table class="table table-bordered">
       <tr>
         <th>課程編號</th>
-        <td><input class="form-control" type="text" value="{{ data.商品編號 }}" name="pid" readonly class="id_input"></td>
+        <td><input class="form-control" value="{{ data.課程編號 }}" name="cid" readonly class="id_input"></td>
       </tr>
       <tr>
         <th>課程名稱</th>
-        <td><input class="form-control" type="text" value="{{ data.商品名稱 }}" name="name" required></td>
+        <td><input class="form-control" type="text" value="{{ data.課程名稱 }}" name="cname" required></td>
       </tr>
       <tr>
-        <th>開課系所</th>
-        <td><input class="form-control" type="text" value="{{ data.單價 }}" name="price" required></td>
-      </tr>
-      <tr>
-        <th>教課老師</th>
+        <th><label for="inputProductCategory" class="form-label">開課系所</label></th>
         <td>
-          <select class="form-control" name="category">
-            {% if data.類別 == 'CD' %}
-            <option value="BOOK">BOOK</option>
-            <option value="DVD">DVD</option>
-            <option value="CD" selected>CD</option>
-            {% elif data.類別 == 'DVD' %}
-            <option value="BOOK">BOOK</option>
-            <option value="DVD" selected>DVD</option>
-            <option value="CD">CD</option>
-            {% else %}
-            <option value="BOOK" selected>BOOK</option>
-            <option value="DVD">DVD</option>
-            <option value="CD">CD</option>
-            {% endif %}
-
+          <select id="inputProductCategory" class="form-select" name="department" required>
+                <option selected disabled value="">請選擇系所</option>
+                <option value="資訊管理學系">資訊管理學系</option>
+                <option value="資訊工程學系">資訊工程學系</option>
+                <option value="電機工程學系">電機工程學系</option>
+                <option value="會計學系">會計學系</option>
+                <option value="財務金融學系">財務金融學系</option>
+            </select>
+      </tr>
+      <tr>
+        <th>教師編號</th>
+        <td><input class="form-control" type="text" value="{{ data.教師編號 }}" name="tid" required></td>
+      </tr>
+      <tr>
+        <th><label for="inputProductCategory" class="form-label">開課教室</label></th>
+        <td>
+            <select id="inputCourseRoom" class="form-select" name="roomid" required>
+              <option selected disabled value="">請選擇教室</option>
+              <option value="R001">R001</option>
+              <option value="R002">R002</option>
+              <option value="R003">R003</option>
+              <option value="R004">R004</option>
+              <option value="R005">R005</option>
+              <option value="R006">R006</option>
+              <option value="R007">R007</option>
+              <option value="R008">R008</option>
+              <option value="R009">R009</option>
+              <option value="R010">R010</option>
           </select>
       </tr>
-      <tr>
-        <th>商品敘述</th>
-        <td>
-          <textarea class="form-control" name="description">{{ data.課程敘述 }}</textarea>
-        </td>
-      </tr>
-      <!-- <tr>
-        <th>商品圖片</th>
-        <td>
-          <input type="file" name="file" id="file-uploader" data-target="file-uploader"/>
-        </td>
-      </tr> -->
     </table>
     <center>
       <div class="option">
         <button class="btn btn-outline-success" type="submit">確定修改</button>
-        <a href="{{ url_for('manager.productManager') }}"><button class="btn btn-outline-danger">回商品管理</button></a>
       </div>
     </center>
 
   </form>
+  <a href="{{ url_for('manager.productManager') }}"><button class="btn btn-outline-danger">回課程管理</button></a>
 </div>
 
 
