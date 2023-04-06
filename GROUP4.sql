@@ -54,19 +54,19 @@ CREATE TABLE SeleRecord(
 
 INSERT INTO TEACHER VALUES('T003', '楊大???');
 INSERT INTO TEACHER VALUES('T004', '?��小�??');
-INSERT INTO TEACHER VALUES('T001', '??�大�?');
+INSERT INTO TEACHER VALUES('T001', '??�大�??');
 INSERT INTO TEACHER VALUES('T012', '張恩?��');
 
 INSERT INTO COURSE 
-    VALUES('CS102', '?��?��?���?', '資�?�工程學�?', 'T003');
+    VALUES('CS102', '?��?��?���??', '資�?�工程學�??', 'T003');
 INSERT INTO COURSE
-    VALUES('CS103', '資�?��?��??', '資�?�工程學�?', 'T003');
+    VALUES('CS103', '資�?��?��??', '資�?�工程學�??', 'T003');
 INSERT INTO COURSE
-    VALUES('EE111', '?��子學', '?��機工程學�?', 'T004');
+    VALUES('EE111', '?��子學', '?��機工程學�??', 'T004');
 INSERT INTO COURSE
-    VALUES('EE112', '?��路學', '?��機工程學�?', 'T004');
+    VALUES('EE112', '?��路學', '?��機工程學�??', 'T004');
 INSERT INTO COURSE
-    VALUES('AA105', '??��?�學', '??��?�學�?', 'T012');    
+    VALUES('AA105', '??��?�學', '??��?�學�??', 'T012');    
 
 
 INSERT INTO Classroom
@@ -97,5 +97,5 @@ ALTER TABLE SELERECORD ADD FOREIGN KEY (cId) REFERENCES Course(cId)
 
 
 ALTER TABLE SELERECORD
-MODIFY CONSTRAINT recTocourse 
-ON UPDATE CASCADE;
+    MODIFY CONSTRAINT SYS_C008032 
+    ON UPDATE CASCADE;

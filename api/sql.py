@@ -82,6 +82,7 @@ class Member():
         sql = 'SELECT IDENTITY, NAME FROM MEMBER WHERE MID = :id '
         return DB.fetchone(DB.execute_input(DB.prepare(sql), {'id': userid}))
 
+
 class Contact():
     def create_contact(input):
         sql = 'INSERT INTO CONTACT VALUES (:id, :phone, :contname,:account)'
@@ -127,8 +128,7 @@ class Course():
         return DB.fetchone(DB.execute_input(DB.prepare(sql), {'id': cid}))
 
 
-
-#############課程
+# 課程
 class Product():
     def count():
         sql = 'SELECT COUNT(*) FROM COURSE'
@@ -159,13 +159,13 @@ class Product():
         DB.commit()
 
 
-
 class Selerecord():
-    def check_course(userid, cid):  #檢查是否選過這門課
+    def check_course(userid, cid):  # 檢查是否選過這門課
         sql = 'SELECT * FROM SELERECORD WHERE CID = :cid AND ACCOUNT = :id'
         return DB.fetchone(DB.execute_input(DB.prepare(sql), {'id': userid, 'cid': cid}))
         # user_id是account
-    def get_oneRecord(userid):  #檢查是否有選課
+
+    def get_oneRecord(userid):  # 檢查是否有選課
         sql = 'SELECT * FROM SELERECORD WHERE ACCOUNT = :id'
         return DB.fetchone(DB.execute_input(DB.prepare(sql), {'id': userid}))
 
@@ -173,7 +173,8 @@ class Selerecord():
         sql = 'INSERT INTO SELERECORD VALUES (:id, :cid)'
         DB.execute_input(DB.prepare(sql), input)
         DB.commit()
-    def get_record(account):    #找出這個人選過的所有課
+
+    def get_record(account):  # 找出這個人選過的所有課
         sql = 'SELECT * FROM SELERECORD WHERE ACCOUNT = :id'
         return DB.fetchall(DB.execute_input(DB.prepare(sql), {'id': account}))
 
@@ -181,6 +182,7 @@ class Selerecord():
         sql = 'DELETE FROM SELERECORD WHERE CID = :cid AND ACCOUNT = :id'
         DB.execute_input(DB.prepare(sql), {'id': userid, 'cid': cid})
         DB.commit()
+
 
 class Record():
     def get_total_money(tno):
@@ -219,6 +221,12 @@ class Record():
     def get_total(tno):
         sql = 'SELECT SUM(TOTAL) FROM RECORD WHERE TNO = :id'
         return DB.fetchall(DB.execute_input(DB.prepare(sql), {'id': tno}))[0]
+
+
+class Teacher():
+    def get_teacher():
+        sql = 'SELECT * FROM TEACHER ORDER BY tId ASC'
+        return DB.fetchall(DB.execute(DB.connect(), sql))
 
 
 class Order_List():
