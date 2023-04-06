@@ -53,6 +53,9 @@ class Student():
         sql = 'SELECT IDENTITY, SNAME FROM STUDENT WHERE ACCOUNT = :id '
         # userid是account
         return DB.fetchone(DB.execute_input(DB.prepare(sql), {'id': userid}))
+    def get_studentid(account):
+        sql = "SELECT SID FROM STUDENT WHERE ACCOUNT = :id"
+        return DB.fetchone(DB.execute_input(DB.prepare(sql), {'id': account}))
 
 
 class Member():
@@ -182,6 +185,9 @@ class Selerecord():
         sql = 'DELETE FROM SELERECORD WHERE CID = :cid AND ACCOUNT = :id'
         DB.execute_input(DB.prepare(sql), {'id': userid, 'cid': cid})
         DB.commit()
+    def get_all_record():
+        sql = 'SELECT * FROM SELERECORD'
+        return DB.fetchall(DB.execute(DB.connect(), sql))
 
 
 class Record():

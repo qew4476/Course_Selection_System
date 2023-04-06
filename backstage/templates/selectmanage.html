@@ -1,0 +1,50 @@
+{% extends "backstage.html" %}
+{% block head %}
+{{ super() }}
+{% endblock head %}
+
+{% block title %}學生選課資料{% endblock title%}
+
+{% block content %}
+
+{% with messages = get_flashed_messages() %}
+{% if messages[0] == 'No permission' %}
+  
+<script language="javascript">
+  alert('您沒有使用者的權限喔！');
+</script>
+
+{% endif %}
+{% endwith %}
+
+<br/>
+<div class="container-xl">
+  <br/>
+  <form method="post" action={{ url_for('manager.selectmanage') }}>
+    <table class="table table-bordered">
+      <tr>
+        <th><center>課程編號</center></th>
+        <th><center>課程名稱</center></th>
+        <th><center>開課系所</center></th>
+        <th><center>開課教師</center></th>
+        
+        <!-- <th><center>數量</center></th> -->
+        <th><center>學生學號</center></th>
+      </tr>
+      {% for lesson in data %}
+      <tr>
+        <td> <center>{{ lesson.課程編號 }}</center></td>
+        <td> <center>{{ lesson.課程名稱 }}</center></td>
+        <td> <center>{{ lesson.開課系所 }}</center></td>
+        <td> <center>{{ lesson.教師姓名[0] }}</center></td>
+        <td> <center>{{ lesson.選課學號[0] }}</center></td>
+
+      </tr>
+      {% endfor %}
+    </table>
+
+  </form>
+
+</div>
+
+{% endblock content%}

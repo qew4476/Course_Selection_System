@@ -157,3 +157,37 @@ def orderManager():
             
 
     return render_template('orderManager.html', orderData = order_data, user=current_user.name)
+
+@manager.route('/selectmanage', methods=['GET', 'POST'])
+@login_required
+def selectmanage():
+    # 以防使用者誤闖
+    if request.method == 'GET':
+        if (current_user.role == 'user'):
+            flash('No permission')
+            return redirect(url_for('manager.home'))                  
+
+    course_row = Selerecord.get_all_record(); #取得所有選課紀錄
+    course_data = []
+    for i in course_row:
+        cid = i[1]
+        tname = Course.get_course_tname(cid)
+        course = {
+            '課程編號': cid,
+            '課程名稱': Course.get_course(cid)[1],
+            '開課系所': Course.get_course(cid)[2],
+            '教師姓名': tname,
+            '選課帳號': i[0],
+            '選課學號':Student.get_studentid(i[0])
+        }
+        course_data.append(course)
+    
+    # if request.method =='POST':
+    #     if "delete" in request.form:
+    #         cid = request.values.get('delete')  #要刪的課程編號
+    #         Selerecord.delete_course(current_user.id, cid)   
+
+
+    #課程資料顯示
+
+    return render_template('selectmanage.html',data = course_data)
