@@ -164,7 +164,7 @@ class Product():
 
 class Selerecord():
     def check_course(userid, cid):  # 檢查是否選過這門課
-        sql = 'SELECT * FROM SELERECORD WHERE CID = :cid AND ACCOUNT = :id'
+        sql = 'SELECT * FROM SELERECORD WHERE CID = :cid AND ACCOUNT = :id '
         return DB.fetchone(DB.execute_input(DB.prepare(sql), {'id': userid, 'cid': cid}))
         # user_id是account
 
@@ -186,7 +186,7 @@ class Selerecord():
         DB.execute_input(DB.prepare(sql), {'id': userid, 'cid': cid})
         DB.commit()
     def get_all_record():
-        sql = 'SELECT * FROM SELERECORD'
+        sql = 'SELECT * FROM SELERECORD ORDER BY cid ASC'
         return DB.fetchall(DB.execute(DB.connect(), sql))
 
 
