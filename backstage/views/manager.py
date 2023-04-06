@@ -74,7 +74,7 @@ def add():
             en = random.choice(string.ascii_letters)
             cid = en + number
             data = Product.get_course(cid)                             #這行為原始code用來跳離迴圈的條件，懶得修掉，data可以忽略
-
+        cid = request.values.get('cid')
         name = request.values.get('name')
         department = request.values.get('department')
         tid = request.values.get('tid')
