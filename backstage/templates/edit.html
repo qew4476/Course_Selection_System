@@ -13,7 +13,7 @@
 <div class="container-xl">
   <br />
   <form method="post" enctype=multipart/form-data action={{ url_for('manager.edit') }}>
-    <table class="table table-bordered">
+    <table class="table table-bordered" style="background-color: rgb(215, 245, 245);">
       <tr>
         <th>課程編號</th>
         <td><input class="form-control" value="{{ data.課程編號 }}" name="cid" readonly class="id_input"></td>
@@ -58,12 +58,13 @@
     </table>
     <center>
       <div class="option">
-        <button class="btn btn-outline-success" type="submit">確定修改</button>
+        <button class="btn btn-outline-success" type="submit" style="font-size: large; color: aliceblue; background-color: #2aa38b;">確定修改</button>
       </div>
     </center>
 
   </form>
-  <a href="{{ url_for('manager.productManager') }}"><button class="btn btn-outline-danger">回課程管理</button></a>
+  <a href="{{ url_for('manager.productManager') }}"><button class="btn btn-outline-danger" 
+    style="font-size: large; color: aliceblue; background-color:rgb(201, 68, 68);">回課程管理</button></a>
 </div>
 
 

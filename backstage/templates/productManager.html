@@ -55,7 +55,8 @@
         </span>
         <input class="form-control me-2" id="keyword" placeholder="搜尋課程" aria-label="Search">
     </div>
-    <button type="button" class="btn btn-outline-success" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+    <button type="button" class="btn btn-outline-success" data-bs-toggle="modal" data-bs-target="#staticBackdrop"
+         style="color: white; background-color:#009879; font-size: larger;">
         新增課程
     </button>
 </div>
@@ -129,7 +130,7 @@
 
     <form method='post' action={{ url_for('manager.productManager') }}>
         <table id="manager" class="table table-bordered">
-            <thead>
+            <thead style="background-color:#44c1a8;">
                 <tr>
                     <th width="10%">
                         <center>課程編號</center>
@@ -151,7 +152,7 @@
             <tbody id="course">
                 {% for i in book_data %}
                 <tr>
-                    <td>
+                    <td style="background-color: rgb(202, 247, 247); font-weight: bold;">
                         <center>{{ i.課程編號 }}</center>
                     </td>
                     <td>
