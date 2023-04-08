@@ -49,7 +49,7 @@ def productManager():
         return redirect(url_for('manager.edit', cid = cid))
     
     book_data = book()
-    return render_template('productManager.html', book_data = book_data, user=current_user.name)
+    return render_template('productManager.html', bookdata = book_data, user=current_user.name)
 
 def book():
     book_row = Product.get_all_course()
