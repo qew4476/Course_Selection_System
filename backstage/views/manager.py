@@ -146,7 +146,7 @@ def edit():
 
     else:
         course = show_info()
-        return render_template('edit.html', data = course)
+        return render_template('edit.html', data = course,user=current_user.name)
 
 
 def show_info():
@@ -217,4 +217,4 @@ def selectmanage():
 
     #課程資料顯示
 
-    return render_template('selectmanage.html',data = course_data)
+    return render_template('selectmanage.html',data = course_data,user=current_user.name)
