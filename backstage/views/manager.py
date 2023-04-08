@@ -65,28 +65,30 @@ def book():
         book_data.append(book)
     return book_data
 
-# @manager.route('/studentManager', methods=['GET', 'POST'])
-# @login_required
-# def studentManager():
-#     if request.method == 'GET':
-#         if(current_user.role == 'user'):
-#             flash('No permission')
-#             return redirect(url_for('index'))
-# # show student data
-#         order_row = Student.get_all_account()
-#         order_data = []
-#         for i in order_row:
-#             order = {
-#                 '學號': i[2],
-#                 '姓名': i[3],
-#                 '帳號': i[0],
-#                 '緊急聯絡人'
+@manager.route('/studentManager', methods=['GET', 'POST'])
+@login_required
+def studentManager():
+    if request.method == 'POST':
+        pass
+    else:
 
-#             }
-#             order_data.append(order)
+#show student data
+        order_row = Student.get_all_student()
+        order_data = []
+        for i in order_row:
+            order = {
+                
+                '學號': i[0],
+                '姓名': i[1],
+                '權限': i[2],
+                'Email': i[3],
+                '緊急聯絡人姓名': i[4],
+                '緊急聯絡人電話': i[5],
+            }
+            order_data.append(order)
             
 
-#     return render_template('orderManager.html', orderData = order_data, user=current_user.name)
+    return render_template('student.html', orderData = order_data, user=current_user.name)
 
 
 

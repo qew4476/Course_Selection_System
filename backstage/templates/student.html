@@ -17,29 +17,31 @@
 {% endif %}
 {% endwith %}
 <br/>
-<p style="text-align:center; font-size:larger; margin-left: 50px;background-color: #61edd1;font-weight:bolder">學生選課資料</p>
+<p style="text-align:center; font-size:larger; margin-left: 50px;background-color: #61edd1;font-weight:bolder">學生聯絡人資料</p>
 
 <br/>
 <div class="container-xl">
   <br/>
-  <form method="post" action={{ url_for('manager.selectmanage') }}>
+  <form method="post" action={{ url_for('manager.studentManager') }}>
     <table class="table table-bordered">
       <tr  style="background-color:#44c1a8;">
-        <th><center>課程編號</center></th>
-        <th><center>課程名稱</center></th>
-        <th><center>開課系所</center></th>
-        <th><center>開課教師</center></th>
-        
-        <!-- <th><center>數量</center></th> -->
-        <th><center>學生學號</center></th>
+        <th><center>學號</center></th>
+        <th><center>姓名</center></th>
+        <th><center>權限</center></th>
+        <th><center>Email</center></th>
+        <th><center>緊急聯絡人姓名</center></th>
+        <th><center>緊急聯絡人電話</center></th>
       </tr>
-      {% for lesson in data %}
+      {% for lesson in orderData %}
       <tr>
-        <td style="background-color: rgb(202, 247, 247); font-weight: bold;"> <center>{{ lesson.課程編號 }}</center></td>
-        <td> <center>{{ lesson.課程名稱 }}</center></td>
-        <td> <center>{{ lesson.開課系所 }}</center></td>
-        <td> <center>{{ lesson.教師姓名[0] }}</center></td>
-        <td style="background-color: rgb(172, 248, 248);"> <center>{{ lesson.選課學號[0] }}</center></td>
+
+        <td style="background-color: rgb(202, 247, 247); font-weight: bold;"> <center>{{ lesson.學號 }}</center></td>
+        <td> <center>{{ lesson.姓名 }}</center></td>
+        <td> <center>{{ lesson.權限 }}</center></td>
+        <td> <center>{{ lesson.Email }}</center></td>
+        <td> <center>{{ lesson.緊急聯絡人姓名 }}</center></td>
+        <td> <center>{{ lesson.緊急聯絡人電話 }}</center></td>
+
 
       </tr>
       {% endfor %}

@@ -84,9 +84,12 @@
             <a class="nav-link" href="{{ url_for('manager.selectmanage') }}">學生選課資料</a>
           </li>
           <li class="nav-item">
+            <a class="nav-link" href="{{ url_for('manager.studentManager') }}">學生聯絡人資料</a>
+          </li>
+          <li class="nav-item">
             <a class="nav-link" href="{{ url_for('analysis.dashboard') }}">資料分析</a>
           </li>
-          
+
         <div class="d-flex">
             <a href="{{ url_for('api.logout') }}"><button class="btn btn-outline-danger" type="submit">登出系統</button></a>
         </div>         

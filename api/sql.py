@@ -57,7 +57,7 @@ class Student():
         sql = "SELECT SID FROM STUDENT WHERE ACCOUNT = :id"
         return DB.fetchone(DB.execute_input(DB.prepare(sql), {'id': account}))
     def get_all_student():
-        sql = "SELECT * FROM STUDENT"
+        sql = "SELECT SID, SNAME, IDENTITY, SEMAIL, CONTNAME, PHONE FROM STUDENT NATURAL JOIN CONTACT ORDER BY SID ASC"
         return DB.fetchall(DB.execute(DB.connect(), sql))
 
 class Member():
