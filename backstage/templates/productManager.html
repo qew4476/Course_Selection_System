@@ -56,8 +56,18 @@
          style="color: white; background-color:#009879; font-size: larger;">
         新增課程
     </button>
+
 </div>
 
+{% with messages = get_flashed_messages() %}
+{% if messages %}
+</p>
+<p  style="color: red;   text-align: right;
+margin-right: 130px;">
+    添加失敗！不存在此導師編號，或課程編號已重複！
+</p>
+{% endif %}
+{% endwith %}
 <form method="post" enctype=multipart/form-data action={{ url_for('manager.add') }}>
     <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
         aria-labelledby="staticBackdropLabel" aria-hidden="true">
@@ -79,6 +89,7 @@
                     <div class="mb-3">
                         <label for="inputUnitPrice" class="form-label">教師編號</label>
                         <input type="text" class="form-control" id="inputUnitPrice" name="tid" required>
+
                     </div>
                     <div class="mb-3">
                         <label for="inputProductCategory" class="form-label">開課系所</label>

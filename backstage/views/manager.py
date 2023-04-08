@@ -82,17 +82,33 @@ def add():
 
         if (len(name) < 1):
             return redirect(url_for('manager.productManager'))
-        
-        Product.add_course(
-            {'cid' : cid,
-             'cName' : name,
-             'department' : department,
-             'tid' : tid,
-             'roomid' : roomid
-            }
-        )
 
-        return redirect(url_for('manager.productManager'))
+        #防呆，避免輸入不存在的老師
+        exist_teacher = Teacher.get_teacher()
+        teacher_list = []
+        for i in exist_teacher:
+            teacher_list.append(i[0])
+        exist_course = Course.get_all_course()
+        course_list = []
+        for i in exist_course:
+            course_list.append(i[0])
+        if (tid not in teacher_list):
+            flash('FailedGet')
+            return redirect(url_for('manager.productManager'))
+        elif(cid in course_list):
+            flash('FailedGet')
+            return redirect(url_for('manager.productManager'))
+        else:
+            
+            Product.add_course(
+                {'cid' : cid,
+                'cName' : name,
+                'department' : department,
+                'tid' : tid,
+                'roomid' : roomid
+                }
+            )
+            return redirect(url_for('manager.productManager'))
 
     return render_template('productManager.html')
 
@@ -105,6 +121,17 @@ def edit():
             return redirect(url_for('bookstore'))
 
     if request.method == 'POST':
+
+        
+                    #防呆，避免輸入不存在的老師
+        exist_teacher = Teacher.get_teacher()
+        teacher_list = []
+        for i in exist_teacher:
+            teacher_list.append(i[0])
+        if(request.values.get('tid') not in teacher_list):
+            flash('FailedGet')
+            return redirect(url_for('manager.productManager'))
+
         Product.update_course(
             {
             'cid' : request.values.get('cid'),
@@ -114,7 +141,7 @@ def edit():
             'roomid' : request.values.get('roomid')
             }
         )
-        
+
         return redirect(url_for('manager.productManager'))
 
     else:

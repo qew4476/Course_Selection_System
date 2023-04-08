@@ -233,6 +233,9 @@ class Teacher():
     def get_teacher():
         sql = 'SELECT * FROM TEACHER ORDER BY tId ASC'
         return DB.fetchall(DB.execute(DB.connect(), sql))
+    def get_all_tid():
+        sql = 'SELECT TID FROM TEACHER'
+        return DB.fetchall(DB.execute(DB.connect(), sql))
 
 
 class Order_List():

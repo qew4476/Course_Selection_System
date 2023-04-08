@@ -37,6 +37,15 @@
       <tr>
         <th>教師編號</th>
         <td><input class="form-control" type="text" value="{{ data.教師編號 }}" name="tid" required></td>
+        {% with messages = get_flashed_messages() %}
+{% if messages %}
+</p>
+<p  style="color: red;   text-align: right;
+margin-right: 130px;">
+    編輯失敗！不存在此導師編號！
+</p>
+{% endif %}
+{% endwith %}
       </tr>
       <tr>
         <th><label for="inputProductCategory" class="form-label">開課教室</label></th>
