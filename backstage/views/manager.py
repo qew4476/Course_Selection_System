@@ -64,6 +64,32 @@ def book():
             }
         book_data.append(book)
     return book_data
+
+# @manager.route('/studentManager', methods=['GET', 'POST'])
+# @login_required
+# def studentManager():
+#     if request.method == 'GET':
+#         if(current_user.role == 'user'):
+#             flash('No permission')
+#             return redirect(url_for('index'))
+# # show student data
+#         order_row = Student.get_all_account()
+#         order_data = []
+#         for i in order_row:
+#             order = {
+#                 '學號': i[2],
+#                 '姓名': i[3],
+#                 '帳號': i[0],
+#                 '緊急聯絡人'
+
+#             }
+#             order_data.append(order)
+            
+
+#     return render_template('orderManager.html', orderData = order_data, user=current_user.name)
+
+
+
 #新增課程
 @manager.route('/add', methods=['GET', 'POST'])
 def add():
@@ -166,10 +192,16 @@ def show_info():
     }
     return product
 
-
+#顯示教師資料
 @manager.route('/orderManager', methods=['GET', 'POST'])
 @login_required
 def orderManager():
+    if request.method == 'GET':
+        if(current_user.role == 'user'):
+            flash('No permission')
+            return redirect(url_for('bookstore'))
+
+
     if request.method == 'POST':
         pass
     else:

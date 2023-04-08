@@ -56,7 +56,9 @@ class Student():
     def get_studentid(account):
         sql = "SELECT SID FROM STUDENT WHERE ACCOUNT = :id"
         return DB.fetchone(DB.execute_input(DB.prepare(sql), {'id': account}))
-
+    def get_all_student():
+        sql = "SELECT * FROM STUDENT"
+        return DB.fetchall(DB.execute(DB.connect(), sql))
 
 class Member():
     def get_member(account):
