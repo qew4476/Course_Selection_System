@@ -7,193 +7,73 @@
 </br>
 <p style="text-align:center; font-size:larger; background-color: #61edd1;font-weight:bolder">後台資料分析</p>
 
+<script>     /*這個 script 用來做搜尋功能，使用時將第四行改成要搜尋的 table 即可*/
+    $(document).ready(function () {
+        $("#keyword").on("keyup", function () {
+            var value = $(this).val().toLowerCase();
+            $("#course tr").filter(function () {
+                $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+            });
+        });
+    });
+</script>
 
-<div class="my-3 p-3 bg-body rounded shadow-sm">
-  
-  <!-- Dashboard -->
-  <!--
-  <div id="dashboard">
-    <nav>
-      <div class="nav nav-tabs" id="nav-tab" role="tablist">
-        <button class="nav-link active" id="nav-home-tab" data-bs-toggle="tab" data-bs-target="#nav-home" type="button" role="tab" aria-controls="nav-home" aria-selected="true">訂單數量分析</button>
-        <button class="nav-link" id="nav-profile-tab" data-bs-toggle="tab" data-bs-target="#nav-profile" type="button" role="tab" aria-controls="nav-profile" aria-selected="false">書本銷量分類</button>
-        <button class="nav-link" id="nav-contact-tab" data-bs-toggle="tab" data-bs-target="#nav-contact" type="button" role="tab" aria-controls="nav-contact" aria-selected="false">消費總額排名</button> 
-        <button class="nav-link" id="nav-course-tab" data-bs-toggle="tab" data-bs-target="#nav-course" type="button" role="tab" aria-controls="nav-course" aria-selected="false">修課學院分佈</button> 
-      </div>      
-    </nav>
-  </div>
-  <br/>
-  <div class="tab-content" id="nav-tabContent">
-    <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
-      <center> 
-        <div id="maina" class="container-fluid" style="width:1200px;height:500px"></div>
-      </center>
+<div class="d-flex justify-content-between container-xxl">
+    <div class="d-flex col-sm-4">
+        <span class="input-group-text" id="basic-addon1">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search"
+                viewBox="0 0 16 16">
+                <path
+                    d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z" />
+            </svg>
+        </span>
+        <input class="form-control me-2" id="keyword" placeholder="搜尋課程" aria-label="Search">
     </div>
-    <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
-      <center>
-        <div id="mainb" class="container-fluid" style="width: 600px;height:500px"></div>
-      </center>
-    </div>
-    <div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab">
-      <center>
-        <div id="mainc" class="container-fluid" style="width: 1200px;height:500px"></div>
-      </center>
-    </div>
-  </div>
-  -->
 </div>
 
-<script>
-  // 以長條圖與折線圖分析各月訂單
-  /*
-  var chartDoma = document.getElementById('maina');
-  var myCharta = echarts.init(chartDoma);
-  var data = {{revenue|tojson}};
-  var count = {{dataa|tojson}};
-  var optiona = {
-    title: {
-      text: '各月訂單數量分析'
-    },
-    tooltip: {},
-    legend: {
-      data: ['訂單數量']
-    },
-    xAxis: {
-      data: ['1月', '2月', '3月', '4月', '5月', '6月', '7月', '8月', '9月', '10月', '11月', '12月']
-    },
-    yAxis: {},
-    series: [{
-      name: '銷售總額',
-      type: 'bar',
-      // symbol: 'circle',
-      symbolSize: 16,
-      data: data,
-      markPoint: {
-        data: [
-          {type: 'max', name: '銷量最高月份'},
-          {type: 'min', name: '銷量最低月份'}
-        ]
-      },
-      label: {
-        show: true,
-        position: 'top',
-        textStyle: {
-          fontSize: 15
-        }
-      }
-    }
-    ],
-    legend: {
-      show: true
-    },
-  };
-  */
- 
-  // 以圓餅圖分析書本銷量
-  var chartDomb = document.getElementById('mainb');
-  var myChartb = echarts.init(chartDomb);
-  var data = {{datab|tojson}};
-  var optionb = {
-    title: {
-      text: '各類商品銷量分析',
-      left: 'center',
-      top: 'center'
-    },
-    tooltip: {},
-    legend: {
-      orient: 'vertical',
-      x: 'left',
-      data: ['BOOK', 'CD', 'DVD']
-    },
-    series: [
-      {
-        type: 'pie',
-        data: data,          
-        radius: ['40%', '70%']
-      }
-    ]
-  };
-
-  // 使用動態長條圖查看消費總額最多的使用者
-  /*
-  var chartDomc = document.getElementById('mainc');
-  var myChartc = echarts.init(chartDomc);
-  var data = {{datac|tojson}};
-  var nameList = {{nameList|tojson}};
-  // var counter = {{counter|tojson}};
-  var countList = {{countList|tojson}};
-  var optionc = {
-    title: {
-      text: '使用者消費排名'
-    },
-    xAxis: {
-      max: 'dataMax'
-    },
-    yAxis: {
-      type: 'category',
-      data: nameList,
-      inverse: true,
-      animationDuration: 300,
-      animationDurationUpdate: 300,
-      max: 3
-    },
-    tooltip: {},
-    series: [
-      {
-        realtimeSort: true,
-        name: '消費總額',
-        type: 'bar',
-        data: data,
-        label: {
-          show: true,
-          position: 'right',
-          valueAnimation: true
-        }
-      },
-      {
-        realtimeSort: true,
-        name: '訂單總數',
-        type: 'bar',
-        data: countList,
-        label: {
-          show: true,
-          position: 'right',
-          valueAnimation: true
-        }
-      }
-      ],
-    legend: {
-      show: true
-    },
-    animationDuration: 3000,
-    animationDurationUpdate: 3000,
-    animationEasing: 'linear',
-    animationEasingUpdate: 'linear'
-  };
-
-  function run() {
-    myChartc.setOption({
-      series: [
-        {
-          type: 'bar',
-          data
-        }
-      ]
-    });
-  }
-
-  setTimeout(function() {
-    run();
-  }, 0);
-        
-  setInterval(function() {
-    update();
-  }, 3000);
-
-  optiona && myCharta.setOption(optiona);
-  optionb && myChartb.setOption(optionb);
-  optionc && myChartc.setOption(optionc);
-   */   
-</script>
+<div class="my-3 p-3 bg-body rounded shadow-sm">
+    <div class="container-xxl">
+    <form method='post' action={{ url_for('analysis.dashboard') }}>
+        <table id="analysis" class="table table-bordered">
+            <thead style="background-color:#44c1a8;">
+                <tr>
+                    <th width="10%">
+                        <center>課程編號</center>
+                    </th>
+                    <th width="20%">
+                        <center>課程名稱</center>
+                    </th>
+                    <th width="15%">
+                        <center>開課系所</center>
+                    </th>
+                    <th width="15%">
+                        <center>院系分佈</center>
+                    </th>
+                </tr>
+            </thead>
+            <tbody id="course">
+                {% for i in bookdata %}
+                <tr>
+                    <td style="background-color: rgb(202, 247, 247); font-weight: bold;">
+                        <center>{{ i.課程編號 }}</center>
+                    </td>
+                    <td>
+                        <center>{{ i.課程名稱 }}</center>
+                    </td>
+                    <td>
+                        <center>{{ i.開課系所 }}</center>
+                    </td>
+                    <td>
+                        <center><button type="submit" value="{{i.課程編號}}" name="look"
+                            class="btn btn-success">查看分佈</button></center>
+                        </form>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </form>   
+    </div>
+</div>
 
 {% endblock content %}

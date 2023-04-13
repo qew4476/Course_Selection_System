@@ -263,10 +263,11 @@ class Analysis():
     def month_count(i):
         sql = 'SELECT EXTRACT(MONTH FROM ORDERTIME), COUNT(OID) FROM ORDER_LIST WHERE EXTRACT(MONTH FROM ORDERTIME)=:mon GROUP BY EXTRACT(MONTH FROM ORDERTIME)'
         return DB.fetchall(DB.execute_input(DB.prepare(sql), {"mon": i}))
-
-    def category_sale():
-        sql = 'SELECT SUM(TOTAL), CATEGORY FROM(SELECT * FROM PRODUCT,RECORD WHERE PRODUCT.PID = RECORD.PID) GROUP BY CATEGORY'
-        return DB.fetchall(DB.execute(DB.connect(), sql))
+    
+    #有用到的目前只有這個
+    def category_sale(cid):
+        sql = 'SELECT COUNT(*), SGRADE FROM(SELECT * FROM STUDENT, SELERECORD WHERE STUDENT.ACCOUNT = SELERECORD.ACCOUNT) WHERE cID = :cid GROUP BY SGRADE'
+        return DB.fetchall(DB.execute_input(DB.prepare(sql), {'cid': cid}))
 
     def member_sale():
         sql = 'SELECT SUM(PRICE), MEMBER.MID, MEMBER.NAME FROM ORDER_LIST, MEMBER WHERE ORDER_LIST.MID = MEMBER.MID AND MEMBER.IDENTITY = :identity GROUP BY MEMBER.MID, MEMBER.NAME ORDER BY SUM(PRICE) DESC'

@@ -1,0 +1,54 @@
+{% extends "backstage.html" %}
+{% block head %}
+{{ super() }}
+{% endblock head %}
+{% block title %}後台資料分析{% endblock title%}
+{% block content %}
+
+<br>
+  <center> 
+    <div id="maina" class="container-fluid" style="width:1200px;height:500px"></div>
+  </center>
+</br>
+
+<script>
+  // 以長條圖分析各個系所的選課人數
+  var chartDoma = document.getElementById('maina');                   /* 建立圖表    */
+  var myCharta = echarts.init(chartDoma);                             /* 初始化圖表  */
+  var num = {{select_num|tojson}};                                    /* 將資料轉為 json 格式 (不要問我為什麼要，窩不知道:( )*/
+  var optiona = {
+    title: {
+      text: '各系所選課人數 - 長條圖'
+    },
+    tooltip: {},
+    legend: {
+      data: ['各系所人數']
+    },
+    xAxis: {
+      data: ['會計系', '財金系', '資管系', '資工系', '電機系', '法律系', '機械系', '工管系']      /*一樣是寫死的，新增系所時需一併修改*/
+    },
+    yAxis: {},
+    series: [{
+      name: '各系所人數',
+      type: 'bar',
+      symbolSize: 16,
+      data: num,
+      label: {
+        show: true,
+        position: 'top',
+        textStyle: {
+          fontSize: 15
+        }
+      }
+    }
+    ],
+    legend: {
+      show: true
+    },
+  };
+
+  optiona && myCharta.setOption(optiona);                               /* 將圖表渲染?到網頁上*/
+</script>
+
+
+{% endblock content %}

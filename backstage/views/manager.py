@@ -174,7 +174,7 @@ def edit():
 
     else:
         course = show_info()
-        return render_template('edit.html', data = course,user=current_user.name)
+        return render_template('edit.html', data = course, user=current_user.name)
 
 
 def show_info():
