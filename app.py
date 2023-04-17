@@ -29,6 +29,6 @@ def index():
     return render_template('index.html')
 
 if __name__ == '__main__':
-    app.debug = True
+    # app.debug = True
     app.secret_key = "Your Key"
     app.run()
