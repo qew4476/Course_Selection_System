@@ -32,7 +32,7 @@ class DB():
 
 class Student():
     def get_student(account):
-        sql = "SELECT ACCOUNT, PASSWORD,IDENTITY, SID, SNAME, SGRADE, SEMAIL  FROM STUDENT WHERE ACCOUNT = :id"
+        sql = "SELECT ACCOUNT, PASSWORD,IDENTITY, SID, SNAME, MAJOR, SEMAIL  FROM STUDENT WHERE ACCOUNT = :id"
         return DB.fetchall(DB.execute_input(DB.prepare(sql), {'id': account}))
 
     def get_all_account():
@@ -40,7 +40,7 @@ class Student():
         return DB.fetchall(DB.execute(DB.connect(), sql))
 
     def create_student(input):
-        sql = 'INSERT INTO STUDENT VALUES (:account, :password,:sid,:sname, :sgrade, :semail, :identity)'
+        sql = 'INSERT INTO STUDENT VALUES (:account, :password,:sid,:sname, :major, :semail, :identity)'
         DB.execute_input(DB.prepare(sql), input)
         DB.commit()
 
@@ -266,7 +266,7 @@ class Analysis():
     
     #有用到的目前只有這個
     def category_sale(cid):
-        sql = 'SELECT COUNT(*), SGRADE FROM(SELECT * FROM STUDENT, SELERECORD WHERE STUDENT.ACCOUNT = SELERECORD.ACCOUNT) WHERE cID = :cid GROUP BY SGRADE'
+        sql = 'SELECT COUNT(*), MAJOR FROM(SELECT * FROM STUDENT, SELERECORD WHERE STUDENT.ACCOUNT = SELERECORD.ACCOUNT) WHERE cID = :cid GROUP BY MAJOR'
         return DB.fetchall(DB.execute_input(DB.prepare(sql), {'cid': cid}))
 
     def member_sale():

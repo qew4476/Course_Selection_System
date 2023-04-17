@@ -78,7 +78,7 @@ def register():
             input = {
                 'sname': request.form['username'],
                 'sid': request.form['student_id'],
-                'sgrade': request.form['grade'],
+                'major': request.form['grade'],
                 'semail': request.form['email'],
                 'account': user_account,
                 'password': request.form['password'],
