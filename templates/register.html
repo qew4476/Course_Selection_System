@@ -33,8 +33,28 @@
                 密碼：<input type="password" name="password" required />
             </p>
             <p class="mb-3">
-                學級：<input type="text" name="grade" required />
-            </p>
+                <label for="grade">系所：</label>
+                <select class="form-select" name="grade" id="grade" required>
+                   <option selected disabled value="">請選擇系所</option>  
+                   <option value="資訊管理學系">資管系</option>
+                   <option value="資訊工程學系">資工系</option>
+                   <option value="電機工程學系">電機系</option>
+                   <option value="會計學系">會計學系</option>
+                   <option value="法律學系">法律學系</option>
+                   <option value="機械工程學系">機械工程學系</option>
+                   <option value="工商管理學系">工商管理學系</option>
+                   <option value="財務金融學系">財務金融學系</option>
+                </select>
+             </p> 
+
+
+
+
+
+
+
+
+
             <p class="mb-3">
                 Email：<input type="text" name="email" required />
             </p>
