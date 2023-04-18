@@ -8,7 +8,7 @@ import oracledb
 connection = oracledb.connect(
     user="GROUP4",
     password='CkVpA3IHJR',
-    dsn="140.117.69.70/ORCLPDB1")
+    dsn="140.117.69.60/ORCLPDB1")
 
 print("Successfully connected to Oracle Database")
 cursor = connection.cursor()
