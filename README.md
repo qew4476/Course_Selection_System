@@ -8,8 +8,7 @@
 * 老師：教師編號(tId)、教師姓名(tName)
 
 # ERD
-![](https://i.imgur.com/LSOAidO.png)
-
+![](https://i.imgur.com/9dgkd9n.png)
 
 
 # 關聯綱目
