@@ -2,13 +2,14 @@
 一套使用Flask開發的選課系統，後端使用Oracle資料庫。
 
 * 學生：可以是使用者，或是有管理者身份的工讀生，因此學號不唯一，帳號則是唯一。其資料包含Account, Password, sId(學號), sName(姓名), major(科系)， sEmail(信箱), identity(是管理者或使用者)。
-* 緊急聯絡人：學生的緊急聯絡人，紀錄該人的身份證字號(Id)、電話(phone)、姓名(contName)。不同學生可能有不同的緊急聯絡人，比如兩位學生有同一個家長。
-* 課程：有課程編號(cId)、系所名稱(department)、課程名稱(cName)；其中課程編號為唯一。
+* 緊急聯絡人：學生的緊急聯絡人，此實體依附於學生，紀錄該人的身份證字號(Id)、電話(phone)、姓名(contName)。
+* 課程：有課程編號(cId)、系所名稱(department)、課程名稱(cName)；其中課程編號為唯一。課程完全參與於教師，但允許課程建立時選課學生人數為零。
 * 教室：教室編號(roomId)、可容納人數(num)。
 * 老師：教師編號(tId)、教師姓名(tName)
 
 # ERD
-![](https://i.imgur.com/o56QKTA.png)
+![](https://i.imgur.com/LSOAidO.png)
+
 
 
 # 關聯綱目
@@ -51,6 +52,8 @@ python app.py
 ##### 登入使用者帳戶
 * 可在課程導覽處選課
   ![](https://i.imgur.com/hY9Ee9K.png)
+
+
 * 在「選課結果查詢」頁面查看已選的課程，或者退選
   ![](https://i.imgur.com/2niBEKz.png)
 
