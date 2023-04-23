@@ -36,9 +36,9 @@ def productManager():
         
     if 'delete' in request.values:
         cid = request.values.get('delete')
-        data = Record.delete_check(cid)
+        data = Product.get_course(cid)
         
-        if(data != None):
+        if(data == None):
             flash('failed')
         else:
             data = Product.get_course(cid)
