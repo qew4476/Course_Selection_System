@@ -1,9 +1,21 @@
 # 選課系統
 一套使用Flask開發的選課系統，後端使用Oracle資料庫，利用Heroku架設網站。
-
-## DEMO網址
-https://dbprojc1.herokuapp.com/
 [第四組_中山選課系統 - YouTube](https://www.youtube.com/watch?v=KGXBogrHBIM)
+## DEMO網址
+使用Azure(較快), Heroku架設網站
+Azure: [中山選課系統 (proj1g4.azurewebsites.net)](https://proj1g4.azurewebsites.net/)
+Heroku: https://dbprojc1.herokuapp.com/
+
+可連線時間：2023.05.01 ~ 2023.05.06 00:00-24:00
+
+- 註冊；或使用我們所提供的現成帳戶，直接登入使用：
+1. 管理者帳戶
+   帳號：manager
+   密碼：123
+2. 使用者帳戶
+   帳號：user
+   密碼：123
+
 
 # 使用方式
 ### 安裝環境
@@ -20,13 +32,7 @@ python app.py
 
 - [http://localhost:5000/] 進入首頁。
 - 首次使用請點選註冊按鈕，並註冊帳號(分別有使用者&管理者兩個身份)。
-- 註冊後，點選登入即可進入頁面；或使用我們所提供的現成帳戶，直接登入使用：
-1. 管理者帳戶
-   帳號：manager
-   密碼：123
-2. 使用者帳戶
-   帳號：user
-   密碼：123
+
 
 ##### 登入管理者帳戶
 可在課程管理頁面新增、編輯、刪除課程。以下用新增課程舉例：
@@ -118,6 +124,7 @@ python app.py
   Python, Flask
   資料庫  
 	由 SQL、SQLDeveloper 構成
+架設網站：Heroku, Azure
 
 -   使用工具及架構
     ![](https://i.imgur.com/F5WMiSW.png)
