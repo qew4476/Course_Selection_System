@@ -2,9 +2,9 @@
 一套使用Flask開發的選課系統，後端使用Oracle資料庫，利用Heroku架設網站。
 [第四組_中山選課系統 - YouTube](https://www.youtube.com/watch?v=KGXBogrHBIM)
 ## DEMO網址
-使用Azure(較快), Heroku架設網站
-Azure: [中山選課系統 (proj1g4.azurewebsites.net)](https://proj1g4.azurewebsites.net/)
-Heroku: https://dbprojc1.herokuapp.com/
+使用Azure(較快), Heroku架設網站</br>
+Azure: [中山選課系統 (proj1g4.azurewebsites.net)](https://proj1g4.azurewebsites.net/)</br>
+Heroku(備用): https://dbprojc1.herokuapp.com/
 
 可連線時間：2023.05.01 ~ 2023.05.06 00:00-24:00
 
