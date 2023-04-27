@@ -1,57 +1,6 @@
 # 選課系統
-一套使用Flask開發的選課系統，後端使用Oracle資料庫，利用Heroku架設網站。
-[第四組_中山選課系統 - YouTube](https://www.youtube.com/watch?v=KGXBogrHBIM)
-## DEMO網址
-使用Azure(較快), Heroku架設網站
-Azure: [中山選課系統 (proj1g4.azurewebsites.net)](https://proj1g4.azurewebsites.net/)
-Heroku: https://dbprojc1.herokuapp.com/
-
-可連線時間：2023.05.01 ~ 2023.05.06 00:00-24:00
-
-- 註冊；或使用我們所提供的現成帳戶，直接登入使用：
-1. 管理者帳戶
-   帳號：manager
-   密碼：123
-2. 使用者帳戶
-   帳號：user
-   密碼：123
-
-
-# 使用方式
-### 安裝環境
-* Python 3.8.16
-
-##### 安裝python套件
-```
-pip install -r requirements.txt
-```
-##### 啟動程式
-```python=
-python app.py
-```
-
-- [http://localhost:5000/] 進入首頁。
-- 首次使用請點選註冊按鈕，並註冊帳號(分別有使用者&管理者兩個身份)。
-
-
-##### 登入管理者帳戶
-可在課程管理頁面新增、編輯、刪除課程。以下用新增課程舉例：
-![](https://i.imgur.com/2tg141W.png)
-![](https://i.imgur.com/UvVU4k6.png)
-
-* 若新增已重複的課程，或者輸入不存在的教師編號，會出現錯誤訊息。![](https://i.imgur.com/dtcOXVr.png)
-* 在後台資料分析頁面，可查看各課程的選課學生科系分佈
-  1. 點擊查看分佈![](https://i.imgur.com/pJ2DG4f.png)
-  2. ![](https://i.imgur.com/6kVABin.png)
-
-##### 登入使用者帳戶
-* 可在課程導覽處選課
-  ![](https://i.imgur.com/hY9Ee9K.png)
-
-
-* 在「選課結果查詢」頁面查看已選的課程，或者退選
-  ![](https://i.imgur.com/2niBEKz.png)
-
+ 
+一套使用Flask開發的選課系統，後端使用Oracle資料庫，利用Azure, Heroku架設網站。
 
 * 學生：可以是使用者，或是有管理者身份的工讀生，因此學號不唯一，帳號則是唯一。其資料包含Account, Password, sId(學號), sName(姓名), major(科系)， sEmail(信箱), identity(是管理者或使用者)。
 * 緊急聯絡人：學生的緊急聯絡人，此實體依附於學生，紀錄該人的身份證字號(Id)、電話(phone)、姓名(contName)。
@@ -68,7 +17,6 @@ python app.py
 
 
 # 程式系統架構
- 
 
 ### 一、程式系統目的
 
@@ -129,5 +77,56 @@ python app.py
 -   使用工具及架構
     ![](https://i.imgur.com/F5WMiSW.png)
 
+# 使用說明
+[第四組_中山選課系統 - YouTube](https://www.youtube.com/watch?v=KGXBogrHBIM)
+## DEMO網址
+使用Azure link, Heroku架設網站
+Azure(此連結較快): https://proj1g4.azurewebsites.net/
+Heroku(備用): https://dbprojc1.herokuapp.com/
+Github: https://github.com/qew4476/DB_project1_G4
+可連線時間：2023.05.01 ~ 2023.05.06 00:00-24:00
 
+- 可註冊，或使用現成帳戶：
+1. 管理者帳戶
+   帳號：manager
+   密碼：123
+2. 使用者帳戶
+   帳號：user
+   密碼：123
+
+
+# 使用方式
+### 安裝環境
+* Python 3.8.16
+
+##### 安裝python套件
+```
+pip install -r requirements.txt
+```
+##### 啟動程式
+```python=
+python app.py
+```
+
+- [http://localhost:5000/] 進入首頁。
+- 首次使用請點選註冊按鈕，並註冊帳號(分別有使用者&管理者兩個身份)。
+
+
+##### 登入管理者帳戶
+可在課程管理頁面新增、編輯、刪除課程。以下用新增課程舉例：
+![](https://i.imgur.com/2tg141W.png)
+![](https://i.imgur.com/UvVU4k6.png)
+
+* 若新增已重複的課程，或者輸入不存在的教師編號，會出現錯誤訊息。![](https://i.imgur.com/dtcOXVr.png)
+* 在後台資料分析頁面，可查看各課程的選課學生科系分佈
+  1. 點擊查看分佈![](https://i.imgur.com/pJ2DG4f.png)
+  2. ![](https://i.imgur.com/6kVABin.png)
+
+##### 登入使用者帳戶
+* 可在課程導覽處選課
+  ![](https://i.imgur.com/hY9Ee9K.png)
+
+
+* 在「選課結果查詢」頁面查看已選的課程，或者退選
+  ![](https://i.imgur.com/2niBEKz.png)
 
