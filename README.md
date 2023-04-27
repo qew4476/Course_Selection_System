@@ -1,19 +1,9 @@
 # 選課系統
-一套使用Flask開發的選課系統，後端使用Oracle資料庫。
+一套使用Flask開發的選課系統，後端使用Oracle資料庫，利用Heroku架設網站。
 
-* 學生：可以是使用者，或是有管理者身份的工讀生，因此學號不唯一，帳號則是唯一。其資料包含Account, Password, sId(學號), sName(姓名), major(科系)， sEmail(信箱), identity(是管理者或使用者)。
-* 緊急聯絡人：學生的緊急聯絡人，此實體依附於學生，紀錄該人的身份證字號(Id)、電話(phone)、姓名(contName)。
-* 課程：有課程編號(cId)、系所名稱(department)、課程名稱(cName)；其中課程編號為唯一。課程完全參與於教師，但允許課程建立時選課學生人數為零。
-* 教室：教室編號(roomId)、可容納人數(num)。
-* 老師：教師編號(tId)、教師姓名(tName)
-
-# ERD
-![](https://i.imgur.com/9dgkd9n.png)
-
-
-# 關聯綱目
-![](https://i.imgur.com/5y8CgdO.png)
-
+## DEMO網址
+https://dbprojc1.herokuapp.com/
+[第四組_中山選課系統 - YouTube](https://www.youtube.com/watch?v=KGXBogrHBIM)
 
 # 使用方式
 ### 安裝環境
@@ -56,6 +46,19 @@ python app.py
 * 在「選課結果查詢」頁面查看已選的課程，或者退選
   ![](https://i.imgur.com/2niBEKz.png)
 
+
+* 學生：可以是使用者，或是有管理者身份的工讀生，因此學號不唯一，帳號則是唯一。其資料包含Account, Password, sId(學號), sName(姓名), major(科系)， sEmail(信箱), identity(是管理者或使用者)。
+* 緊急聯絡人：學生的緊急聯絡人，此實體依附於學生，紀錄該人的身份證字號(Id)、電話(phone)、姓名(contName)。
+* 課程：有課程編號(cId)、系所名稱(department)、課程名稱(cName)；其中課程編號為唯一。課程完全參與於教師，但允許課程建立時選課學生人數為零。
+* 教室：教室編號(roomId)、可容納人數(num)。
+* 老師：教師編號(tId)、教師姓名(tName)
+
+# ERD
+![](https://i.imgur.com/9dgkd9n.png)
+
+
+# 關聯綱目
+![](https://i.imgur.com/5y8CgdO.png)
 
 
 # 程式系統架構
