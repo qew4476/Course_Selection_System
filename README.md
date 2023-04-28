@@ -98,9 +98,8 @@
 # 使用說明
 [第四組_中山選課系統 - YouTube](https://www.youtube.com/watch?v=KGXBogrHBIM)
 ## DEMO網址
-使用Azure link, Heroku架設網站</br>
-Azure(此連結較快): https://proj1g4.azurewebsites.net/
-</br>Heroku(備用): https://dbprojc1.herokuapp.com/
+使用Heroku架設網站</br>
+</br>Heroku: https://dbprojc1.herokuapp.com/
 </br>Github: https://github.com/qew4476/DB_project1_G4
 </br>可連線時間：2023.05.01 ~ 2023.05.06 00:00-24:00
 
