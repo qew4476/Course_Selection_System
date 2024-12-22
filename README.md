@@ -96,7 +96,7 @@
     ![](https://i.imgur.com/F5WMiSW.png)
 
 # 使用說明
-[第四組_中山選課系統 - YouTube](https://www.youtube.com/watch?v=KGXBogrHBIM)
+(由高同學說明)：[第四組_中山選課系統 - YouTube](https://www.youtube.com/watch?v=KGXBogrHBIM) 
 ## DEMO網址
 使用Heroku架設網站</br>
 </br>Heroku: https://dbprojc1.herokuapp.com/
